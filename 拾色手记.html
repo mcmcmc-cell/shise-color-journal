@@ -1,0 +1,6359 @@
+<!doctype html>
+<!-- 拾色手记 · 单文件网页版：样式与脚本均已内嵌，可离线打开。 -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4EFE4">
+  <title>拾色手记 · 为爱画画的人收集颜色</title>
+  <meta name="description" content="拾色手记是一本给画画爱好者的数字色彩手记：收集 Ins 风、奶油感、莫兰迪与胶片色卡，也可以在这里自由混色、搭配并保存你的专属色卡。">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxRTIwMUMiLz4KICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjI0IiByPSIxMCIgZmlsbD0iI0U3QjZBMSIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iMjQiIHI9IjEwIiBmaWxsPSIjRDg2QjRFIi8+CiAgPGNpcmNsZSBjeD0iMjQiIGN5PSI0MCIgcj0iMTAiIGZpbGw9IiNFOEQzQTYiLz4KICA8Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSIxMCIgZmlsbD0iIzhBOTg3QyIvPgogIDxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjMuNCIgZmlsbD0iI0Y3RjJFNyIvPgo8L3N2Zz4K">
+  <style>
+/* =========================================================
+   拾色手记 HUE JOURNAL
+   A digital colour journal for painters
+   ========================================================= */
+
+:root {
+  --paper: #f4efe4;
+  --paper-soft: #f8f3e9;
+  --sand: #e8dccb;
+  --sand-deep: #d9cab5;
+  --ink: #1d1e1a;
+  --ink-soft: #2a2c27;
+  --muted: #726b60;
+  --muted-light: #958c7f;
+  --line: rgba(29, 30, 26, 0.16);
+  --line-strong: rgba(29, 30, 26, 0.34);
+  --accent: #d56748;
+  --accent-deep: #b34d31;
+  --peach: #e9bfa8;
+  --sage: #8a987c;
+  --butter: #e4d2a9;
+  --forest: #3d4e43;
+  --dark: #1c1f1b;
+  --dark-soft: #242821;
+  --cream: #f7f0e3;
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  --font-serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-latin: "Baskerville", "Iowan Old Style", "Times New Roman", Georgia, serif;
+  --font-mono: "SFMono-Regular", "Cascadia Mono", "Courier New", monospace;
+  --container: 1240px;
+  --gutter: 32px;
+  --ease-out: cubic-bezier(0.22, 0.72, 0.18, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 104px;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--peach);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+button,
+input,
+textarea {
+  border-radius: 0;
+}
+
+input {
+  color: inherit;
+}
+
+svg {
+  display: block;
+}
+
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 2000;
+  top: 12px;
+  left: 12px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 12px;
+  transform: translateY(-160%);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.container {
+  width: min(var(--container), calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+.page-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.048;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* ---------- typography helpers ---------- */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow-glyph {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.eyebrow-glyph .icon {
+  width: 10px;
+  height: 10px;
+  stroke: none;
+  fill: currentColor;
+}
+
+.eyebrow-num {
+  display: inline-grid;
+  min-width: 30px;
+  height: 22px;
+  padding-inline: 7px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.eyebrow--light {
+  color: rgba(247, 240, 227, 0.62);
+}
+
+.eyebrow--light .eyebrow-num {
+  color: var(--peach);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- announcement / header ---------- */
+
+.announce {
+  position: relative;
+  z-index: 110;
+  background: var(--dark);
+  color: var(--cream);
+}
+
+.announce-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  gap: 24px;
+}
+
+.announce p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: rgba(247, 240, 227, 0.68);
+}
+
+.pulse-dot {
+  position: relative;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--peach);
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--peach);
+  border-radius: 50%;
+  animation: pulse-ring 2.4s var(--ease-out) infinite;
+}
+
+.announce a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  transition: color 0.25s ease;
+}
+
+.announce a:hover {
+  color: var(--peach);
+}
+
+.announce .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 239, 228, 0.88);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(244, 239, 228, 0.94);
+  box-shadow: 0 10px 30px rgba(42, 36, 26, 0.04);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 82px;
+  gap: 28px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.brand-mark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  transform: rotate(-8deg);
+  transition: transform 0.5s var(--ease-spring);
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(8deg) scale(1.04);
+}
+
+.brand-mark i {
+  display: block;
+  border-radius: 50% 50% 12% 50%;
+}
+
+.brand-mark i:nth-child(1) {
+  background: var(--peach);
+  border-radius: 50% 50% 20% 50%;
+}
+
+.brand-mark i:nth-child(2) {
+  background: var(--accent);
+  border-radius: 50% 50% 50% 20%;
+}
+
+.brand-mark i:nth-child(3) {
+  background: var(--butter);
+  border-radius: 50% 20% 50% 50%;
+}
+
+.brand-mark i:nth-child(4) {
+  background: var(--sage);
+  border-radius: 20% 50% 50% 50%;
+}
+
+.brand-type {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.brand-type strong {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.brand-type small {
+  font-family: var(--font-sans);
+  font-size: 7.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(22px, 2.7vw, 42px);
+  margin-left: auto;
+  margin-right: clamp(8px, 2.8vw, 42px);
+}
+
+.desktop-nav a {
+  position: relative;
+  padding: 7px 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.desktop-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.favorites-pill,
+.mini-cta {
+  display: inline-flex;
+  height: 39px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.favorites-pill {
+  padding: 0 6px 0 14px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.favorites-pill:hover {
+  background: rgba(255, 255, 255, 0.36);
+  border-color: var(--ink);
+}
+
+.favorites-pill .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.favorites-pill b {
+  display: inline-grid;
+  min-width: 23px;
+  height: 23px;
+  padding-inline: 5px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.mini-cta {
+  padding: 0 18px;
+  background: var(--ink);
+  color: var(--cream);
+  border: 1px solid var(--ink);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.mini-cta .icon {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.mini-cta:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+
+.mini-cta:hover .icon {
+  transform: translate(2px, -2px);
+}
+
+.menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 15px;
+  height: 1px;
+  margin: 4px auto;
+  background: var(--ink);
+  transition:
+    transform 0.3s var(--ease-out),
+    opacity 0.3s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:first-child {
+  transform: translateY(2.5px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:last-child {
+  transform: translateY(-2.5px) rotate(-45deg);
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(48px, 6vw, 86px) 0 clamp(72px, 8vw, 112px);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: max(-180px, -12vw);
+  width: 38vw;
+  height: 38vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(29, 30, 26, 0.055);
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(400px, 0.92fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 82px);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  padding-top: 6px;
+}
+
+.hero-eyebrow {
+  margin-bottom: clamp(24px, 3.2vw, 42px);
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-size: clamp(3.25rem, 5.35vw, 5.2rem);
+  font-weight: 600;
+  line-height: 1.19;
+  letter-spacing: -0.065em;
+}
+
+.brush-word {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  padding: 0 0.04em;
+}
+
+.brush-word::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -0.075em;
+  bottom: 0.015em;
+  left: -0.04em;
+  height: 0.54em;
+  border-radius: 52% 44% 46% 58% / 55% 48% 60% 44%;
+  background: var(--peach);
+  transform: rotate(-1.8deg);
+  opacity: 0.9;
+}
+
+.hero-lede {
+  max-width: 510px;
+  margin-top: clamp(26px, 3vw, 38px);
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.9;
+  letter-spacing: 0.005em;
+}
+
+.hero-lede em {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.06em;
+  font-style: normal;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(28px, 3.4vw, 40px);
+}
+
+.button {
+  display: inline-flex;
+  min-height: 51px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 23px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.035em;
+  transition:
+    color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.button .icon {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:hover .icon {
+  transform: translateX(3px);
+}
+
+.button--ink {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.button--ink:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+
+.button--ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+}
+
+.button--ghost:hover {
+  background: rgba(255, 255, 255, 0.38);
+  border-color: var(--ink);
+}
+
+.button-swatch {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent 48%, var(--paper) 49% 51%, transparent 52%),
+    linear-gradient(var(--peach) 0 50%, var(--sage) 50%);
+  box-shadow: inset 0 0 0 1px rgba(29, 30, 26, 0.14);
+}
+
+.hero-meta {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(20px, 3.5vw, 48px);
+  margin-top: clamp(40px, 5.5vw, 68px);
+  padding-top: 16px;
+}
+
+.hero-meta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.hero-meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-right: clamp(18px, 3vw, 38px);
+  border-right: 1px solid var(--line);
+}
+
+.hero-meta > div:last-of-type {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.hero-meta strong {
+  font-family: var(--font-latin);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-meta span {
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.hero-scrawl {
+  display: none;
+  margin-left: auto;
+  align-self: center;
+  font-family: var(--font-serif);
+  color: var(--accent-deep);
+  font-size: 12px;
+  line-height: 1.55;
+  transform: rotate(-5deg);
+}
+
+/* hero artwork */
+
+.hero-art {
+  position: relative;
+  width: 100%;
+  max-width: 510px;
+  justify-self: end;
+  padding: 34px 12px 106px 22px;
+  z-index: 2;
+}
+
+.art-halo {
+  position: absolute;
+  z-index: 0;
+  top: -8%;
+  right: -18%;
+  width: 82%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(220, 157, 129, 0.33), rgba(220, 157, 129, 0) 70%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.art-sheet {
+  position: relative;
+  z-index: 2;
+  padding: 13px 13px 9px;
+  border: 1px solid rgba(55, 44, 32, 0.26);
+  background: #faf5ea;
+  box-shadow:
+    22px 26px 0 rgba(29, 30, 26, 0.055),
+    0 26px 60px rgba(67, 51, 35, 0.12);
+  transform: rotate(1.35deg);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.hero-art:hover .art-sheet {
+  transform: rotate(0.4deg);
+}
+
+.paper-tape {
+  position: absolute;
+  z-index: 4;
+  top: -14px;
+  left: 43%;
+  width: 84px;
+  height: 25px;
+  background: rgba(210, 192, 167, 0.72);
+  clip-path: polygon(2% 7%, 98% 0, 96% 93%, 4% 100%);
+  transform: rotate(-2.4deg);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.paper-tape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 2px, rgba(255, 255, 255, 0.12) 2px 3px);
+}
+
+.sheet-head,
+.sheet-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-inline: 2px;
+  color: #6f6457;
+  font-size: 7.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sheet-head {
+  padding-top: 4px;
+  padding-bottom: 11px;
+}
+
+.sheet-foot {
+  padding-top: 9px;
+  padding-bottom: 2px;
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+}
+
+.sheet-foot em {
+  font-family: var(--font-latin);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  color: #9b826b;
+}
+
+.painting {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(55, 44, 32, 0.16);
+  background: #eadfce;
+  aspect-ratio: 420 / 500;
+}
+
+.painting svg {
+  width: 100%;
+  height: 100%;
+}
+
+.painting-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 14%, rgba(255, 238, 213, 0.2), transparent 34%);
+  mix-blend-mode: soft-light;
+}
+
+.painting::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.45'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.palette-note {
+  position: absolute;
+  z-index: 5;
+  bottom: 19px;
+  left: -13px;
+  width: 240px;
+  padding: 16px 17px 13px;
+  border: 1px solid rgba(55, 44, 32, 0.2);
+  background: #fbf6eb;
+  box-shadow: 0 18px 42px rgba(56, 42, 29, 0.17);
+  transform: rotate(-3.1deg);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.hero-art:hover .palette-note {
+  transform: rotate(-1.6deg) translateY(-3px);
+}
+
+.note-head,
+.note-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7a68;
+}
+
+.note-head {
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(55, 44, 32, 0.16);
+}
+
+.palette-note h3 {
+  margin-top: 10px;
+  font-family: var(--font-serif);
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.note-en {
+  margin-top: -1px;
+  font-family: var(--font-latin);
+  font-size: 9.5px;
+  line-height: 1.4;
+  letter-spacing: 0.13em;
+  color: #8a7a68;
+}
+
+.note-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  margin: 12px 0 10px;
+}
+
+.note-swatches i {
+  display: block;
+  height: 23px;
+  background: var(--c);
+}
+
+.note-foot {
+  padding-top: 8px;
+  border-top: 1px solid rgba(55, 44, 32, 0.16);
+  font-size: 6.5px;
+  letter-spacing: 0.08em;
+}
+
+.circle-badge {
+  position: absolute;
+  z-index: 6;
+  top: 5px;
+  right: -16px;
+  width: 114px;
+  height: 114px;
+  filter: drop-shadow(0 14px 24px rgba(56, 42, 29, 0.15));
+}
+
+.circle-badge svg {
+  width: 100%;
+  height: 100%;
+  animation: badge-spin 38s linear infinite;
+}
+
+.art-index {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: -5px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.16em;
+  color: #8a7a68;
+}
+
+.doodle-arrow {
+  position: absolute;
+  z-index: 4;
+  right: 65px;
+  bottom: 28px;
+  width: 76px;
+  height: auto;
+  color: #96674f;
+  transform: rotate(-8deg);
+}
+
+.doodle-label {
+  position: absolute;
+  z-index: 4;
+  right: -7px;
+  bottom: 2px;
+  font-family: var(--font-serif);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #8c5f48;
+  transform: rotate(-3deg);
+}
+
+/* ---------- ticker ---------- */
+
+.ticker {
+  position: relative;
+  overflow: hidden;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #eee5d6;
+}
+
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+}
+
+.ticker::before {
+  left: 0;
+  background: linear-gradient(90deg, #eee5d6, transparent);
+}
+
+.ticker::after {
+  right: 0;
+  background: linear-gradient(-90deg, #eee5d6, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 44s linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-set {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 24px;
+  padding-right: 24px;
+}
+
+.ticker-set span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.ticker-set i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 1px rgba(29, 30, 26, 0.12);
+}
+
+.ticker-set em {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.ticker-set b {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* ---------- common section ---------- */
+
+.section {
+  padding: clamp(82px, 9vw, 130px) 0;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.75fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: end;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 25px;
+}
+
+.section-heading h2,
+.studio-head h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.55rem, 4.1vw, 3.9rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.055em;
+}
+
+.section-aside {
+  max-width: 490px;
+  padding-bottom: 4px;
+}
+
+.section-aside > p {
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 26px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  height: 32px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition:
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+.filter-chip sup {
+  position: relative;
+  top: -0.2em;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  font-weight: 400;
+}
+
+.filter-chip:hover {
+  border-color: var(--ink);
+}
+
+.filter-chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+.palette-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: clamp(38px, 4.4vw, 58px) 0 18px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.palette-toolbar > p {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.045em;
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  transition: color 0.25s ease;
+}
+
+.text-button .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.text-button span {
+  display: inline-grid;
+  min-width: 17px;
+  height: 17px;
+  margin-left: 1px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.text-button:hover,
+.text-button[aria-pressed="true"] {
+  color: var(--accent-deep);
+}
+
+.text-button[aria-pressed="true"] .icon {
+  fill: currentColor;
+}
+
+/* ---------- palette grid ---------- */
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(26px, 3.3vw, 48px) clamp(18px, 2.4vw, 31px);
+}
+
+.palette-card {
+  position: relative;
+  min-width: 0;
+  animation: card-in 0.62s var(--ease-out) both;
+  animation-delay: calc(var(--card-index, 0) * 55ms);
+}
+
+.card-visual-wrap {
+  position: relative;
+}
+
+.card-visual {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1.175 / 1;
+  padding: 0;
+  border: 1px solid rgba(29, 30, 26, 0.15);
+  background: var(--paper-soft);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    box-shadow 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out);
+}
+
+.palette-card:hover .card-visual {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(57, 45, 30, 0.12);
+}
+
+.card-visual:focus-visible {
+  outline-offset: 5px;
+}
+
+.swatch {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 13px 10px 11px;
+  background: var(--swatch);
+  color: var(--label);
+  transition: flex-grow 0.55s var(--ease-out);
+}
+
+.swatch::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.swatch:last-child::after {
+  display: none;
+}
+
+.palette-card:hover .swatch:hover {
+  flex-grow: 1.15;
+}
+
+.swatch-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 0.62;
+}
+
+.swatch-top::after {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.swatch-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+
+.palette-card:hover .swatch-label,
+.card-visual:focus-visible .swatch-label {
+  opacity: 0.92;
+  transform: translateY(0);
+}
+
+.swatch-name {
+  font-family: var(--font-serif);
+  font-size: clamp(9px, 0.8vw, 11px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: 0.015em;
+  opacity: 0.74;
+}
+
+.view-badge {
+  position: absolute;
+  z-index: 3;
+  right: 13px;
+  bottom: 13px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(248, 243, 233, 0.9);
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px) scale(0.86);
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.view-badge .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.palette-card:hover .view-badge,
+.card-visual:focus-visible .view-badge {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hot-tag {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  height: 25px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(29, 30, 26, 0.55);
+  color: #fff9ed;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.hot-tag .icon {
+  width: 9px;
+  height: 9px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.like-button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s var(--ease-spring);
+}
+
+.like-button .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.like-button:hover {
+  transform: translateY(-1px);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+.like-button.is-liked {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: #fff8ec;
+}
+
+.like-button.is-liked .icon {
+  fill: currentColor;
+}
+
+.palette-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 2px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.palette-cat {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 9.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.palette-cat i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.palette-info h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 1.75vw, 25px);
+  font-weight: 600;
+  line-height: 1.36;
+  letter-spacing: -0.02em;
+}
+
+.palette-info h3 .icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.palette-card:hover .palette-info h3 .icon {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.palette-en {
+  margin-top: 1px;
+  color: var(--muted-light);
+  font-family: var(--font-latin);
+  font-size: 9px;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+}
+
+.palette-side {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 13px;
+  padding-top: 16px;
+}
+
+.palette-count {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.empty-state {
+  display: flex;
+  min-height: 380px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 24px;
+  border: 1px dashed var(--line-strong);
+  text-align: center;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-spark {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 22px;
+}
+
+.empty-state h3 {
+  font-family: var(--font-serif);
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.empty-state p {
+  max-width: 360px;
+  margin: 8px 0 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.palette-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: clamp(52px, 6vw, 80px);
+  padding-top: 25px;
+  border-top: 1px solid var(--line);
+}
+
+.palette-foot > p {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+.circle-link {
+  display: flex;
+  width: 90px;
+  height: 90px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  transition:
+    background 0.3s var(--ease-out),
+    color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.circle-link .icon {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+}
+
+.circle-link:hover {
+  background: var(--ink);
+  color: var(--cream);
+  transform: rotate(7deg);
+}
+
+/* ---------- interlude ---------- */
+
+.interlude {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(74px, 8vw, 112px) 0;
+  background: var(--sand);
+}
+
+.interlude::before {
+  content: "✳";
+  position: absolute;
+  top: -0.3em;
+  right: 3vw;
+  font-family: var(--font-serif);
+  font-size: clamp(200px, 30vw, 430px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+.interlude-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(70px, 0.35fr) minmax(0, 1.4fr) minmax(170px, 0.45fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 80px);
+}
+
+.interlude-marks {
+  display: flex;
+  gap: 8px;
+}
+
+.interlude-marks span {
+  display: block;
+  width: 19px;
+  height: 54px;
+  background: var(--c);
+  transform: translateY(calc(var(--n, 0) * 8px));
+}
+
+.interlude-marks span:nth-child(2) {
+  margin-top: 28px;
+}
+
+.interlude-marks span:nth-child(3) {
+  margin-top: -16px;
+}
+
+.interlude-marks span:nth-child(4) {
+  margin-top: 44px;
+}
+
+.interlude blockquote {
+  font-family: var(--font-serif);
+  font-size: clamp(2.15rem, 3.7vw, 3.55rem);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -0.05em;
+  text-align: center;
+}
+
+.soft-mark {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.08em;
+  white-space: nowrap;
+}
+
+.soft-mark::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -0.05em;
+  bottom: 0.03em;
+  left: -0.05em;
+  height: 0.25em;
+  background: var(--accent);
+  opacity: 0.32;
+  transform: rotate(-1deg);
+}
+
+.interlude-note {
+  padding-left: 20px;
+  border-left: 1px solid rgba(29, 30, 26, 0.22);
+}
+
+.interlude-note span {
+  display: block;
+  margin-bottom: 13px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+}
+
+.interlude-note p {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ---------- studio ---------- */
+
+.studio {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(82px, 9vw, 128px) 0 clamp(58px, 7vw, 82px);
+  background:
+    radial-gradient(circle at 88% 4%, rgba(213, 103, 72, 0.12), transparent 28%),
+    radial-gradient(circle at 7% 48%, rgba(138, 152, 124, 0.09), transparent 27%),
+    var(--dark);
+  color: var(--cream);
+}
+
+.studio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.17;
+  background-image: radial-gradient(rgba(247, 240, 227, 0.28) 0.7px, transparent 0.7px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+
+.studio .container {
+  position: relative;
+  z-index: 1;
+}
+
+.studio-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.6fr);
+  align-items: end;
+  gap: clamp(40px, 8vw, 140px);
+}
+
+.studio-head .eyebrow {
+  margin-bottom: 25px;
+}
+
+.studio-head h2 {
+  font-size: clamp(2.8rem, 4.65vw, 4.35rem);
+  line-height: 1.21;
+}
+
+.studio-em {
+  color: var(--peach);
+}
+
+.studio-lede {
+  max-width: 430px;
+  padding-bottom: 5px;
+  color: rgba(247, 240, 227, 0.6);
+  font-size: 13px;
+  line-height: 1.95;
+}
+
+.studio-grid {
+  display: grid;
+  grid-template-columns: 372px minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(16px, 2.2vw, 30px);
+  margin-top: clamp(38px, 5vw, 60px);
+}
+
+.control-deck {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 23px 23px 20px;
+  background: #f3ece0;
+  color: var(--ink);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.16);
+}
+
+.deck-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.deck-head-en {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.active-section {
+  padding-top: 17px;
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.control-label > span:last-child {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.active-color-row {
+  display: grid;
+  grid-template-columns: 94px minmax(0, 1fr);
+  gap: 15px;
+  align-items: stretch;
+}
+
+.color-well {
+  position: relative;
+  display: block;
+  min-height: 123px;
+  overflow: hidden;
+  border: 1px solid rgba(29, 30, 26, 0.18);
+  background: var(--ink);
+  cursor: pointer;
+}
+
+.color-well input {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-well:focus-within,
+.mix-swatch:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.well-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--peach);
+  transition: background 0.35s ease;
+}
+
+.well-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.well-label {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  height: 23px;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(247, 240, 227, 0.84);
+  color: var(--ink);
+  font-size: 8px;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.color-well:hover .well-label {
+  transform: translateY(-2px);
+}
+
+.well-label .icon {
+  width: 9px;
+  height: 9px;
+}
+
+.active-info {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.active-name {
+  font-family: var(--font-serif);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.active-hex {
+  display: none;
+}
+
+.hex-form {
+  display: flex;
+  height: 34px;
+  margin-top: 3px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.hex-form input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  outline-offset: 2px;
+}
+
+.hex-form button {
+  padding: 0 2px 0 10px;
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--accent-deep);
+}
+
+.hex-form.is-invalid {
+  border-bottom-color: var(--accent-deep);
+}
+
+.hex-hint {
+  margin-top: 4px;
+  color: var(--muted-light);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.hex-hint.is-error {
+  color: var(--accent-deep);
+}
+
+.inspiration-pick {
+  margin-top: 17px;
+}
+
+.inspiration-dots {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.inspiration-dot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgba(29, 30, 26, 0.14);
+  border-radius: 50%;
+  background: var(--c);
+  transition:
+    transform 0.24s var(--ease-spring),
+    box-shadow 0.24s ease;
+}
+
+.inspiration-dot:hover {
+  z-index: 2;
+  transform: scale(1.23);
+  box-shadow: 0 4px 12px rgba(29, 30, 26, 0.18);
+}
+
+.inspiration-dot:focus-visible {
+  outline-width: 1px;
+  outline-offset: 2px;
+}
+
+.mix-section {
+  margin-top: 19px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.mix-label {
+  margin-bottom: 9px;
+}
+
+.mix-badge {
+  display: inline-grid;
+  height: 16px;
+  padding: 0 5px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--accent-deep) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 6.5px !important;
+  letter-spacing: 0.04em !important;
+}
+
+.mix-inputs {
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  align-items: center;
+}
+
+.mix-swatch {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.mix-swatch input {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mix-fill {
+  display: block;
+  height: 36px;
+  background: var(--mix);
+  transition: background 0.3s ease;
+}
+
+.mix-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 5px 7px;
+  border-top: 1px solid rgba(29, 30, 26, 0.1);
+  background: #f8f2e7;
+}
+
+.mix-meta b {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.mix-meta em {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-style: normal;
+  color: var(--muted);
+}
+
+.mix-plus {
+  text-align: center;
+  font-family: var(--font-latin);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ratio-row {
+  padding: 10px 0 0;
+}
+
+.ratio-row input[type="range"] {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 7px 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--mix-a, #e9bfa8), var(--mix-b, #6c4b42));
+  outline: none;
+  cursor: pointer;
+}
+
+.ratio-row input[type="range"]::-webkit-slider-thumb {
+  width: 13px;
+  height: 13px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid var(--paper-soft);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(29, 30, 26, 0.45);
+}
+
+.ratio-row input[type="range"]::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--paper-soft);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(29, 30, 26, 0.45);
+}
+
+.ratio-labels {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 0.02em;
+}
+
+.ratio-labels b {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.mix-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 11px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  background: #f8f2e7;
+}
+
+.mix-result-color {
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(29, 30, 26, 0.12);
+  background: #aa856d;
+  transition: background 0.3s ease;
+}
+
+.mix-result > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.mix-result small {
+  color: var(--muted);
+  font-size: 7.5px;
+  line-height: 1.3;
+}
+
+.mix-result strong {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+#addMixBtn {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 6px 3px 6px 7px;
+  border: 0;
+  background: transparent;
+  font-size: 9.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--accent-deep);
+}
+
+#addMixBtn .icon {
+  width: 11px;
+  height: 11px;
+}
+
+#addMixBtn:hover {
+  text-decoration: underline;
+}
+
+.deck-prompt {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 17px;
+  padding: 13px 14px 14px;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.prompt-kicker {
+  display: block;
+  color: var(--peach);
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+}
+
+.deck-prompt p {
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+.prompt-spark {
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.1;
+}
+
+.deck-footnote {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+  color: var(--muted-light);
+  font-size: 8.5px;
+  line-height: 1.6;
+}
+
+.deck-footnote span {
+  color: var(--accent);
+}
+
+/* palette board */
+
+.palette-board-wrap {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 22px 22px 14px;
+  background: #ede4d5;
+  color: var(--ink);
+}
+
+.board-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 14px;
+}
+
+.board-kicker {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.board-head h3 {
+  margin-top: 1px;
+  font-family: var(--font-serif);
+  font-size: clamp(23px, 2vw, 28px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+}
+
+.save-state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.save-state span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sage);
+  transition: background 0.3s ease;
+}
+
+.save-state.is-saving span {
+  background: var(--butter);
+}
+
+.palette-board {
+  display: grid;
+  min-height: 446px;
+  flex: 1;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.canvas-swatch {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 13px 14px;
+  border: 0;
+  background: var(--c);
+  color: var(--label);
+  text-align: left;
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
+}
+
+.canvas-swatch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.canvas-swatch:hover {
+  transform: translateY(-5px);
+}
+
+.canvas-swatch.is-selected {
+  transform: translateY(-7px);
+  box-shadow:
+    0 0 0 2px #ede4d5,
+    0 0 0 3px currentColor,
+    0 14px 28px rgba(29, 30, 26, 0.18);
+}
+
+.canvas-swatch.is-selected:hover {
+  transform: translateY(-8px);
+}
+
+.canvas-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.canvas-selected-tag {
+  opacity: 0;
+  padding: 3px 5px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 6px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  transition: opacity 0.25s ease;
+}
+
+.canvas-swatch.is-selected .canvas-selected-tag {
+  opacity: 0.85;
+}
+
+.canvas-label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.canvas-name {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.45vw, 20px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+.canvas-hex {
+  margin-top: 1px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  opacity: 0.62;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.canvas-remove {
+  position: absolute;
+  z-index: 2;
+  right: 9px;
+  top: 35px;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s var(--ease-spring);
+}
+
+.canvas-remove .icon {
+  width: 9px;
+  height: 9px;
+}
+
+.canvas-swatch:hover .canvas-remove,
+.canvas-remove:focus-visible {
+  opacity: 0.68;
+  transform: scale(1);
+}
+
+.canvas-remove:hover {
+  opacity: 1 !important;
+}
+
+.board-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.board-tip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 190px;
+}
+
+.tip-icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--accent-deep);
+}
+
+.tip-icon .icon {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.board-tip p {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.board-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon-button {
+  display: grid;
+  width: 41px;
+  height: 41px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s var(--ease-out);
+}
+
+.icon-button .icon {
+  width: 15px;
+  height: 15px;
+}
+
+.icon-button:hover {
+  background: var(--ink);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+
+.button--cream {
+  min-height: 41px;
+  padding: 0 15px;
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 10.5px;
+}
+
+.button--cream:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+
+.button--cream .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.board-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 13px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(29, 30, 26, 0.08);
+  color: var(--muted-light);
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* notes under studio */
+
+.studio-notes {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: clamp(22px, 3vw, 40px);
+  margin-top: clamp(60px, 7vw, 94px);
+  padding-top: 31px;
+  border-top: 1px solid rgba(247, 240, 227, 0.18);
+}
+
+.notes-heading > span {
+  display: block;
+  margin-bottom: 13px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: rgba(247, 240, 227, 0.44);
+}
+
+.notes-heading h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2.25vw, 31px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+}
+
+.note-card {
+  padding-left: 17px;
+  border-left: 1px solid rgba(247, 240, 227, 0.15);
+}
+
+.note-num {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--font-latin);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--peach);
+}
+
+.note-num::after {
+  content: "%";
+  margin-left: 2px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+}
+
+.note-card h4 {
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--cream);
+}
+
+.note-card p {
+  color: rgba(247, 240, 227, 0.52);
+  font-size: 10.5px;
+  line-height: 1.85;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(68px, 8vw, 105px) 0 24px;
+  background: var(--paper);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: -140px;
+  right: -110px;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.footer-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.03fr 0.97fr;
+  gap: clamp(50px, 9vw, 140px);
+  padding-bottom: clamp(58px, 7vw, 92px);
+}
+
+.brand--footer {
+  margin-bottom: clamp(40px, 5vw, 62px);
+}
+
+.footer-intro h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.2vw, 5rem);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.065em;
+}
+
+.footer-intro h2 span {
+  position: relative;
+  display: inline-block;
+  color: var(--accent-deep);
+}
+
+.footer-intro h2 span::after {
+  content: "";
+  position: absolute;
+  right: -0.04em;
+  bottom: 0.05em;
+  left: 0;
+  height: 0.06em;
+  background: currentColor;
+  opacity: 0.55;
+  transform: rotate(-1.1deg);
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: clamp(26px, 3.4vw, 40px);
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition:
+    color 0.25s ease,
+    gap 0.3s var(--ease-out);
+}
+
+.footer-cta .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.footer-cta:hover {
+  gap: 17px;
+  color: var(--accent-deep);
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.footer-label {
+  display: block;
+  margin-bottom: 13px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.newsletter {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--line);
+}
+
+.newsletter h3 {
+  margin-bottom: 20px;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2.1vw, 27px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+}
+
+.newsletter form {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  border-bottom: 1px solid var(--line-strong);
+  transition: border-color 0.25s ease;
+}
+
+.newsletter form:focus-within {
+  border-bottom-color: var(--ink);
+}
+
+.newsletter input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  outline: none;
+}
+
+.newsletter input::placeholder {
+  color: var(--muted-light);
+}
+
+.newsletter button {
+  display: inline-flex;
+  height: 33px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px 0 12px;
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.newsletter button .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.newsletter button:hover {
+  color: var(--accent-deep);
+}
+
+.form-note {
+  margin-top: 9px;
+  color: var(--muted-light);
+  font-size: 8.5px;
+  line-height: 1.6;
+}
+
+.form-note.is-success {
+  color: var(--sage);
+}
+
+.form-note.is-error {
+  color: var(--accent-deep);
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: 0.7fr 0.8fr 1fr;
+  gap: 20px;
+  padding-top: 26px;
+}
+
+.footer-links > div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.footer-links .footer-label {
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  position: relative;
+  font-size: 10.5px;
+  line-height: 1.9;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+.footer-social {
+  font-size: 10.5px;
+  line-height: 1.9;
+  color: var(--muted);
+  cursor: default;
+}
+
+.footer-color-stack {
+  display: flex !important;
+  align-self: flex-start;
+  flex-direction: row !important;
+  gap: 4px !important;
+  justify-content: flex-end;
+  padding-top: 21px;
+}
+
+.footer-color-stack i {
+  display: block;
+  width: 22px;
+  height: 48px;
+  background: var(--c);
+}
+
+.footer-color-stack i:nth-child(2) {
+  margin-top: 7px;
+}
+
+.footer-color-stack i:nth-child(3) {
+  margin-top: -4px;
+}
+
+.footer-color-stack i:nth-child(4) {
+  margin-top: 13px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 8.5px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+.footer-bottom p:nth-child(2) {
+  color: var(--muted-light);
+}
+
+.footer-bottom span {
+  margin-left: 5px;
+  color: var(--accent);
+}
+
+.footer-bottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.footer-bottom a .icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---------- palette dialog ---------- */
+
+.palette-dialog {
+  width: min(980px, calc(100% - 44px));
+  max-width: none;
+  max-height: calc(100vh - 44px);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 40px 110px rgba(0, 0, 0, 0.35);
+}
+
+.palette-dialog::backdrop {
+  background: rgba(18, 20, 17, 0.64);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+}
+
+.palette-dialog[open] {
+  animation: dialog-in 0.4s var(--ease-out) both;
+}
+
+.palette-dialog[open]::backdrop {
+  animation: backdrop-in 0.35s ease both;
+}
+
+.palette-dialog:focus {
+  outline: none;
+}
+
+.dialog-shell {
+  position: relative;
+}
+
+.dialog-close {
+  position: absolute;
+  z-index: 10;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(29, 30, 26, 0.24);
+  border-radius: 50%;
+  background: rgba(247, 240, 227, 0.92);
+  color: var(--ink);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s var(--ease-spring);
+}
+
+.dialog-close:hover {
+  background: var(--ink);
+  color: var(--cream);
+  transform: rotate(6deg);
+}
+
+.dialog-close .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.dialog-visual {
+  display: flex;
+  min-height: 282px;
+  background: var(--paper-deep, #e8ddcc);
+}
+
+.modal-swatch {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 0;
+  background: var(--c);
+  color: var(--label);
+  text-align: left;
+  transition: flex-grow 0.45s var(--ease-out);
+}
+
+.modal-swatch:hover {
+  flex-grow: 1.35;
+}
+
+.modal-swatch::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.modal-swatch:last-child::after {
+  display: none;
+}
+
+.modal-swatch-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  opacity: 0.64;
+}
+
+.modal-swatch-top .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.dialog-visual .modal-swatch:last-child .modal-swatch-top .icon {
+  display: none;
+}
+
+.modal-swatch-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-swatch-name {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+.modal-swatch-hex {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  opacity: 0.76;
+}
+
+.dialog-body {
+  padding: 30px 38px 32px;
+}
+
+.dialog-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.dialog-kicker {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+}
+
+.dialog-body h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.4vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+.dialog-en {
+  margin-top: 3px;
+  color: var(--muted-light);
+  font-family: var(--font-latin);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+}
+
+.dialog-fav {
+  display: inline-flex;
+  height: 38px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 10px;
+  white-space: nowrap;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dialog-fav .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.dialog-fav:hover {
+  border-color: var(--ink);
+}
+
+.dialog-fav.is-liked {
+  border-color: var(--accent-deep);
+  background: var(--accent-deep);
+  color: #fff8ec;
+}
+
+.dialog-fav.is-liked .icon {
+  fill: currentColor;
+}
+
+.dialog-desc {
+  max-width: 660px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.dialog-quote {
+  position: relative;
+  max-width: 640px;
+  margin-top: 20px;
+  padding: 12px 0 12px 17px;
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.proportion-block {
+  margin-top: 24px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.proportion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+}
+
+.proportion-head span:last-child {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: var(--muted-light);
+}
+
+.proportion-bar {
+  display: flex;
+  height: 8px;
+  gap: 3px;
+}
+
+.proportion-bar span {
+  display: block;
+  background: var(--c);
+}
+
+.proportion-labels {
+  display: flex;
+  gap: 3px;
+  margin-top: 5px;
+}
+
+.proportion-labels span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted-light);
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.dialog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.dialog-tags span {
+  display: inline-flex;
+  height: 25px;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 0.02em;
+}
+
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 26px;
+}
+
+.dialog-actions .button {
+  min-height: 44px;
+  padding-inline: 19px;
+  font-size: 10.5px;
+}
+
+.dialog-actions > p {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted-light);
+  font-size: 8.5px;
+  white-space: nowrap;
+}
+
+.dialog-actions > p .icon {
+  width: 11px;
+  height: 11px;
+}
+
+/* ---------- toast ---------- */
+
+.toast {
+  position: fixed;
+  z-index: 1000;
+  bottom: 26px;
+  left: 50%;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 17px 8px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 16px 36px rgba(20, 20, 17, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 14px);
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast-icon {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sage);
+  color: var(--cream);
+}
+
+.toast-icon .icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---------- animations ---------- */
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.7);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (min-width: 1280px) {
+  .hero-scrawl {
+    display: block;
+  }
+}
+
+@media (max-width: 1120px) {
+  :root {
+    --gutter: 28px;
+  }
+
+  .desktop-nav {
+    gap: 22px;
+    margin-right: 10px;
+  }
+
+  .favorites-pill span {
+    display: none;
+  }
+
+  .favorites-pill {
+    padding-left: 10px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(370px, 0.83fr);
+    gap: 34px;
+  }
+
+  .hero-art {
+    max-width: 460px;
+    padding-right: 2px;
+  }
+
+  .palette-note {
+    width: 220px;
+    left: -4px;
+  }
+
+  .studio-grid {
+    grid-template-columns: 344px minmax(0, 1fr);
+  }
+
+  .control-deck {
+    padding: 20px;
+  }
+
+  .active-color-row {
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .color-well {
+    min-height: 119px;
+  }
+
+  .palette-board-wrap {
+    padding: 20px 18px 13px;
+  }
+
+  .canvas-swatch {
+    padding-inline: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .desktop-nav,
+  .mini-cta {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .favorites-pill span {
+    display: inline;
+  }
+
+  .favorites-pill {
+    padding-left: 13px;
+  }
+
+  .mobile-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    max-height: 0;
+    border-bottom: 1px solid transparent;
+    background: var(--paper);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 0.4s var(--ease-out),
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .mobile-menu.is-open {
+    overflow-y: auto;
+    max-height: 390px;
+    max-height: min(390px, calc(100dvh - 99px));
+    border-bottom-color: var(--line);
+    opacity: 1;
+    visibility: visible;
+    box-shadow: 0 26px 40px rgba(45, 37, 27, 0.09);
+  }
+
+  .mobile-menu nav {
+    width: min(var(--container), calc(100% - var(--gutter) * 2));
+    margin: 0 auto;
+    padding: 9px 0 18px;
+  }
+
+  .mobile-menu nav a,
+  .mobile-menu nav button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 17px;
+    padding: 17px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+
+  .mobile-menu nav span {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--muted);
+  }
+
+  .mobile-menu nav b {
+    display: inline-grid;
+    min-width: 23px;
+    height: 23px;
+    margin-left: auto;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 400;
+  }
+
+  .mobile-menu > p {
+    width: min(var(--container), calc(100% - var(--gutter) * 2));
+    margin: 0 auto;
+    padding-bottom: 20px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .hero-copy {
+    max-width: 700px;
+  }
+
+  .hero-title {
+    font-size: clamp(3.4rem, 8.6vw, 5.2rem);
+  }
+
+  .hero-lede {
+    max-width: 560px;
+  }
+
+  .hero-scrawl {
+    display: block;
+  }
+
+  .hero-art {
+    width: min(100%, 500px);
+    justify-self: center;
+    padding-bottom: 100px;
+  }
+
+  .section-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .section-aside {
+    max-width: 650px;
+  }
+
+  .palette-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card-visual {
+    aspect-ratio: 1.2 / 1;
+  }
+
+  .studio-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  .studio-lede {
+    max-width: 600px;
+  }
+
+  .studio-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .control-deck {
+    width: min(100%, 640px);
+    margin-inline: auto;
+    padding: 24px;
+  }
+
+  .active-color-row {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+
+  .color-well {
+    min-height: 138px;
+  }
+
+  .inspiration-dots {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .palette-board {
+    min-height: 430px;
+  }
+
+  .studio-notes {
+    grid-template-columns: 1.2fr 1fr;
+    row-gap: 35px;
+  }
+
+  .notes-heading {
+    grid-row: span 2;
+  }
+
+  .footer-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 54px;
+  }
+
+  .footer-right {
+    max-width: 620px;
+  }
+
+  .interlude-inner {
+    grid-template-columns: 60px minmax(0, 1fr) 180px;
+    gap: 30px;
+  }
+
+  .interlude blockquote {
+    text-align: left;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 20px;
+  }
+
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .announce-inner {
+    min-height: 31px;
+  }
+
+  .announce p {
+    font-size: 9px;
+    letter-spacing: 0.02em;
+  }
+
+  .announce a {
+    display: none;
+  }
+
+  .header-inner {
+    min-height: 68px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+
+  .brand-type strong {
+    font-size: 16px;
+  }
+
+  .brand-type small {
+    font-size: 6.5px;
+  }
+
+  .favorites-pill {
+    height: 35px;
+    padding: 0 6px 0 10px;
+  }
+
+  .favorites-pill span {
+    display: none;
+  }
+
+  .favorites-pill b {
+    min-width: 21px;
+    height: 21px;
+  }
+
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero {
+    padding-top: 46px;
+    padding-bottom: 54px;
+  }
+
+  .hero::before {
+    display: none;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 22px;
+    font-size: 8.5px;
+    letter-spacing: 0.13em;
+  }
+
+  .hero-title {
+    font-size: clamp(2.25rem, 10.8vw, 3.9rem);
+    line-height: 1.28;
+    letter-spacing: -0.065em;
+  }
+
+  .hero-lede {
+    margin-top: 24px;
+    font-size: 13.5px;
+    line-height: 1.85;
+  }
+
+  .hero-actions {
+    gap: 8px;
+    margin-top: 25px;
+  }
+
+  .hero-actions .button {
+    min-height: 46px;
+    gap: 9px;
+    padding: 0 16px;
+    font-size: 10.5px;
+  }
+
+  .hero-meta {
+    gap: 16px;
+    margin-top: 37px;
+  }
+
+  .hero-meta > div {
+    padding-right: 16px;
+  }
+
+  .hero-meta strong {
+    font-size: 23px;
+  }
+
+  .hero-meta span {
+    font-size: 8px;
+  }
+
+  .hero-scrawl {
+    display: none;
+  }
+
+  .hero-art {
+    width: 100%;
+    max-width: 440px;
+    padding: 26px 4px 74px 8px;
+  }
+
+  .art-sheet {
+    padding: 10px 10px 7px;
+    box-shadow:
+      12px 16px 0 rgba(29, 30, 26, 0.055),
+      0 18px 42px rgba(67, 51, 35, 0.12);
+  }
+
+  .sheet-head {
+    font-size: 6px;
+    letter-spacing: 0.07em;
+  }
+
+  .sheet-foot {
+    font-size: 7px;
+  }
+
+  .sheet-foot em {
+    font-size: 8.5px;
+  }
+
+  .palette-note {
+    bottom: 12px;
+    left: 0;
+    width: 188px;
+    padding: 12px 13px 10px;
+  }
+
+  .note-head,
+  .note-foot {
+    font-size: 5.5px;
+  }
+
+  .palette-note h3 {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+
+  .note-en {
+    font-size: 8px;
+  }
+
+  .note-swatches {
+    gap: 3px;
+    margin: 8px 0 7px;
+  }
+
+  .note-swatches i {
+    height: 18px;
+  }
+
+  .note-foot {
+    font-size: 5px;
+  }
+
+  .circle-badge {
+    top: 0;
+    right: -2px;
+    width: 86px;
+    height: 86px;
+  }
+
+  .art-index {
+    display: none;
+  }
+
+  .doodle-arrow,
+  .doodle-label {
+    display: none;
+  }
+
+  .ticker {
+    padding: 13px 0;
+  }
+
+  .ticker-set {
+    gap: 17px;
+    padding-right: 17px;
+  }
+
+  .ticker-set span {
+    gap: 7px;
+    font-size: 11px;
+  }
+
+  .ticker-set em {
+    font-size: 7.5px;
+  }
+
+  .ticker::before,
+  .ticker::after {
+    width: 35px;
+  }
+
+  .section {
+    padding-top: 68px;
+    padding-bottom: 68px;
+  }
+
+  .section-heading .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .section-heading h2,
+  .studio-head h2 {
+    font-size: clamp(2.15rem, 9vw, 3rem);
+    line-height: 1.3;
+  }
+
+  .section-aside > p {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+
+  .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .filter-chip {
+    width: 100%;
+    height: 32px;
+    justify-content: center;
+    padding-inline: 8px;
+    font-size: 10px;
+  }
+
+  .palette-toolbar {
+    margin-top: 30px;
+    gap: 12px;
+  }
+
+  .palette-toolbar > p {
+    gap: 6px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .text-button {
+    flex: 0 0 auto;
+    font-size: 8.5px;
+  }
+
+  .palette-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .card-visual {
+    aspect-ratio: 1.18 / 1;
+  }
+
+  .swatch {
+    padding: 11px 8px 10px;
+  }
+
+  .swatch-top {
+    font-size: 7px;
+  }
+
+  .swatch-name {
+    font-size: 9px;
+  }
+
+  .swatch-label {
+    opacity: 0.82;
+    transform: none;
+  }
+
+  .swatch-hex {
+    display: none;
+  }
+
+  .view-badge {
+    display: none;
+  }
+
+  .palette-info {
+    padding-top: 13px;
+    padding-bottom: 15px;
+  }
+
+  .palette-info h3 {
+    font-size: 21px;
+  }
+
+  .palette-side {
+    gap: 10px;
+    padding-top: 14px;
+  }
+
+  .palette-foot {
+    margin-top: 44px;
+    padding-top: 20px;
+  }
+
+  .palette-foot > p {
+    font-size: 15px;
+  }
+
+  .circle-link {
+    width: 73px;
+    height: 73px;
+    font-size: 11px;
+  }
+
+  .interlude {
+    padding: 60px 0;
+  }
+
+  .interlude-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .interlude-marks {
+    flex-direction: row;
+  }
+
+  .interlude-marks span {
+    width: 15px;
+    height: 38px;
+  }
+
+  .interlude-marks span:nth-child(2) {
+    margin-top: 13px;
+  }
+
+  .interlude-marks span:nth-child(3) {
+    margin-top: -4px;
+  }
+
+  .interlude-marks span:nth-child(4) {
+    margin-top: 21px;
+  }
+
+  .interlude blockquote {
+    font-size: clamp(1.9rem, 7.7vw, 2.6rem);
+    line-height: 1.6;
+  }
+
+  .interlude-note {
+    max-width: 220px;
+  }
+
+  .studio {
+    padding-top: 68px;
+  }
+
+  .studio-head .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .studio-lede {
+    font-size: 11.5px;
+  }
+
+  .studio-grid {
+    margin-top: 30px;
+  }
+
+  .control-deck {
+    padding: 18px;
+  }
+
+  .active-color-row {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .color-well {
+    min-height: 130px;
+  }
+
+  .active-name {
+    font-size: 21px;
+  }
+
+  .inspiration-dots {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .inspiration-dot:nth-child(n + 11) {
+    display: none;
+  }
+
+  .mix-inputs,
+  .ratio-row,
+  .mix-result {
+    max-width: none;
+  }
+
+  .mix-fill {
+    height: 34px;
+  }
+
+  .palette-board-wrap {
+    padding: 17px 16px 13px;
+  }
+
+  .palette-board {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .canvas-swatch {
+    display: block;
+    min-height: 87px;
+    padding: 14px;
+  }
+
+  .canvas-swatch:hover,
+  .canvas-swatch.is-selected,
+  .canvas-swatch.is-selected:hover {
+    transform: none;
+  }
+
+  .canvas-swatch.is-selected {
+    box-shadow:
+      inset 0 0 0 2px #ede4d5,
+      inset 0 0 0 3px currentColor;
+  }
+
+  .canvas-swatch::after {
+    opacity: 0.055;
+  }
+
+  .canvas-top {
+    margin-bottom: 20px;
+  }
+
+  .canvas-swatch.is-selected .canvas-selected-tag {
+    opacity: 0.68;
+  }
+
+  .canvas-label {
+    align-items: flex-end;
+  }
+
+  .canvas-name {
+    font-size: 18px;
+  }
+
+  .canvas-hex {
+    margin: 0;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .canvas-remove {
+    top: 35px;
+    right: 12px;
+    opacity: 0.55;
+    transform: none;
+  }
+
+  .board-foot {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .board-tip {
+    max-width: none;
+  }
+
+  .board-actions {
+    justify-content: flex-start;
+  }
+
+  .button--cream {
+    flex: 1;
+  }
+
+  .board-caption {
+    font-size: 6px;
+  }
+
+  .studio-notes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 27px;
+    margin-top: 55px;
+  }
+
+  .notes-heading {
+    grid-row: auto;
+    margin-bottom: 7px;
+  }
+
+  .note-card {
+    padding-left: 14px;
+  }
+
+  .note-num {
+    font-size: 32px;
+    margin-bottom: 9px;
+  }
+
+  .site-footer {
+    padding-top: 58px;
+  }
+
+  .footer-main {
+    gap: 45px;
+    padding-bottom: 52px;
+  }
+
+  .brand--footer {
+    margin-bottom: 34px;
+  }
+
+  .footer-intro h2 {
+    font-size: clamp(2.75rem, 11.5vw, 4rem);
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 26px;
+  }
+
+  .footer-color-stack {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    padding-top: 0;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 9px 20px;
+  }
+
+  .footer-bottom p:nth-child(2) {
+    display: none;
+  }
+
+  .footer-bottom a {
+    margin-left: auto;
+  }
+
+  .palette-dialog {
+    width: calc(100% - 20px);
+    max-height: calc(100vh - 20px);
+  }
+
+  .dialog-visual {
+    min-height: 198px;
+  }
+
+  .modal-swatch {
+    flex: 1 1 0;
+    padding: 12px 8px;
+  }
+
+  .modal-swatch-name {
+    font-size: 12px;
+  }
+
+  .modal-swatch-hex {
+    font-size: 7px;
+  }
+
+  .modal-swatch-top {
+    font-size: 7px;
+  }
+
+  .modal-swatch-top .icon {
+    display: none;
+  }
+
+  .dialog-visual .modal-swatch:last-child .modal-swatch-top {
+    visibility: hidden;
+  }
+
+  .dialog-close {
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .dialog-body {
+    padding: 22px 20px 24px;
+  }
+
+  .dialog-title-row {
+    gap: 12px;
+  }
+
+  .dialog-body h2 {
+    font-size: 2.1rem;
+  }
+
+  .dialog-fav {
+    height: 34px;
+    padding: 0 11px;
+    font-size: 9px;
+  }
+
+  .dialog-desc {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+
+  .dialog-quote {
+    font-size: 13.5px;
+  }
+
+  .proportion-head {
+    font-size: 8px;
+  }
+
+  .proportion-head span:last-child {
+    display: none;
+  }
+
+  .proportion-labels span {
+    font-size: 5.5px;
+  }
+
+  .dialog-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .dialog-actions > p {
+    font-size: 8px;
+  }
+
+  .toast {
+    bottom: 16px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-meta {
+    justify-content: space-between;
+  }
+
+  .hero-meta > div {
+    padding-right: 10px;
+  }
+
+  .hero-meta strong {
+    font-size: 21px;
+  }
+
+  .hero-meta span {
+    font-size: 7.5px;
+  }
+
+  .palette-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .palette-toolbar .text-button {
+    align-self: flex-end;
+  }
+
+  .palette-info {
+    gap: 8px;
+  }
+
+  .board-actions {
+    flex-wrap: wrap;
+  }
+
+  .button--cream {
+    flex-basis: 100%;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-bottom a {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ticker-track,
+  .circle-badge svg,
+  .pulse-dot::after {
+    animation: none !important;
+  }
+}
+
+</style>
+  
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 5.9a5.3 5.3 0 0 0-7.5 0L12 7.2l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 22l8.8-8.6a5.3 5.3 0 0 0 0-7.5Z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="1.5"/><path d="M15.5 8.5v-3a2 2 0 0 0-2-2h-9a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c4.5 0 7.5 10 12 10H21M18 14l3 3-3 3M3 17h3.5c1.5 0 2.8-1.1 4.1-2.7M14.6 7.7C15.9 7.2 17.2 7 18.5 7H21M18 4l3 3-3 3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5.5 5.5L20 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 1c.7 7.5 3.5 10.3 11 11-7.5.7-10.3 3.5-11 11-.7-7.5-3.5-10.3-11-11C8.5 11.3 11.3 8.5 12 1Z"/></symbol>
+    <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="page-grain" aria-hidden="true"></div>
+
+  <div class="announce">
+    <div class="container announce-inner">
+      <p><span class="pulse-dot" aria-hidden="true"></span>为爱画画的人，每周收集一组好看的颜色</p>
+      <a href="#studio">本周开放：自由调色台 <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </div>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="拾色手记，回到首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-type"><strong>拾色手记</strong><small>HUE JOURNAL</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="#palettes">流行色卡</a>
+        <a href="#studio">自由调色</a>
+        <a href="#notes">配色小抄</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="favorites-pill" id="headerFavorites" type="button" aria-label="查看我收藏的色卡">
+          <svg class="icon"><use href="#i-heart"/></svg>
+          <span>我的收藏</span>
+          <b id="headerFavCount">0</b>
+        </button>
+        <a class="mini-cta" href="#studio">开始调色 <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="打开菜单">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <nav aria-label="移动端导航">
+        <a href="#palettes"><span>01</span>流行色卡</a>
+        <a href="#studio"><span>02</span>自由调色</a>
+        <a href="#notes"><span>03</span>配色小抄</a>
+        <button type="button" id="mobileFavorites"><span>♡</span>我的收藏 <b id="mobileFavCount">0</b></button>
+      </nav>
+      <p>为画画的人收集颜色，也把颜色还给你。</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow reveal">
+            <span class="eyebrow-glyph"><svg class="icon"><use href="#i-spark"/></svg></span>
+            COLOR INSPIRATION FOR PAINTERS
+          </p>
+          <h1 class="hero-title reveal">把喜欢的颜色，<br><span class="brush-word">调进</span>今天的画里。</h1>
+          <p class="hero-lede reveal">从正在流行的 <em>Ins 风</em>、奶油色与胶片感里，找到今天想用的颜色。也可以亲手混合、搭配，做一张只属于你的色卡。</p>
+          <div class="hero-actions reveal">
+            <a class="button button--ink" href="#palettes">去逛流行色卡 <svg class="icon"><use href="#i-arrow"/></svg></a>
+            <a class="button button--ghost" href="#studio"><span class="button-swatch" aria-hidden="true"></span>打开调色台 <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+          </div>
+          <div class="hero-meta reveal" aria-label="网站数据">
+            <div><strong>09</strong><span>组当季配色</span></div>
+            <div><strong>45</strong><span>支灵感颜色</span></div>
+            <div><strong>∞</strong><span>次自由搭配</span></div>
+            <p class="hero-scrawl" aria-hidden="true">先选颜色，<br>再开始画。</p>
+          </div>
+        </div>
+
+        <div class="hero-art reveal" aria-label="本周色卡：蜜桃拿铁">
+          <div class="art-halo" aria-hidden="true"></div>
+          <div class="art-sheet">
+            <span class="paper-tape" aria-hidden="true"></span>
+            <div class="sheet-head"><span>STILL LIFE · STUDY 08</span><span>2026 / AUTUMN</span></div>
+            <div class="painting">
+              <svg viewBox="0 0 420 500" role="img" aria-label="一幅以奶油色、蜜桃色和陶土红画成的抽象静物练习">
+                <rect width="420" height="500" fill="#EADFCE"/>
+                <path d="M0 0h420v138c-103 44-208 20-298 54C77 208 37 242 0 254V0Z" fill="#D99B82" opacity=".72"/>
+                <circle cx="307" cy="118" r="70" fill="#D36B48"/>
+                <path d="M0 345c83-28 172-5 242-2 68 3 123-4 178-15v172H0Z" fill="#CBB79D"/>
+                <path d="M34 500V281c0-78 53-132 124-132" fill="none" stroke="#A98D72" stroke-width="1.2" opacity=".55"/>
+                <ellipse cx="218" cy="432" rx="135" ry="21" fill="#8B735B" opacity=".24"/>
+                <path d="M256 356c15 0 43 5 56 18 16 17 0 45-36 45-29 0-48-20-38-40 6-12 12-20 18-23Z" fill="#E2D1B7"/>
+                <path d="M97 366c19 0 32 16 29 38-3 24-16 40-34 40-19 0-29-15-28-35 2-25 13-43 33-43Z" fill="#8E9677"/>
+                <path d="M96 368c-1-11 1-18 8-26" fill="none" stroke="#4D5E4B" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M174 293c8 25 2 40-7 59-16 32-13 79 23 96 39 18 81-4 86-46 3-27-9-51-21-72-8-15-12-27-5-45Z" fill="#3D4E43"/>
+                <path d="M189 304c8 20 3 44-5 62-8 19-11 51 9 66 13 10 28 7 38-3-23 4-38-17-40-40-2-30 9-62-2-85Z" fill="#59695A" opacity=".72"/>
+                <g fill="none" stroke="#4D5E4B" stroke-width="2.6" stroke-linecap="round">
+                  <path d="M213 296c-12-51-32-88-67-129"/>
+                  <path d="M222 294c10-56 24-95 59-139"/>
+                  <path d="M207 303c-20-42-38-60-68-75"/>
+                  <path d="M230 300c22-39 37-74 40-116"/>
+                </g>
+                <g fill="#737F67">
+                  <path d="M174 226c-21-2-31-15-30-31 18 0 31 10 30 31Z"/>
+                  <path d="M252 201c8-19 23-25 38-20-4 17-17 26-38 20Z"/>
+                  <path d="M158 264c-19 2-31-7-35-22 17-4 30 4 35 22Z"/>
+                  <path d="M258 252c16-9 31-4 38 9-12 11-27 9-38-9Z"/>
+                </g>
+                <g>
+                  <circle cx="142" cy="158" r="29" fill="#F3D9C1"/>
+                  <circle cx="142" cy="158" r="11" fill="#C35C47"/>
+                  <circle cx="286" cy="143" r="34" fill="#F8E8D3"/>
+                  <circle cx="286" cy="143" r="13" fill="#D3A079"/>
+                  <circle cx="136" cy="224" r="19" fill="#B96A67"/>
+                  <circle cx="136" cy="224" r="7" fill="#763E40"/>
+                  <circle cx="273" cy="181" r="15" fill="#E9C9A5"/>
+                  <circle cx="273" cy="181" r="6" fill="#B87758"/>
+                </g>
+                <path d="M382 500V260" stroke="#A18065" stroke-width="1" opacity=".4"/>
+                <text x="28" y="40" fill="#544638" font-family="Baskerville, Georgia, serif" font-size="10" letter-spacing="2.2">A QUIET AFTERNOON</text>
+                <text x="28" y="56" fill="#544638" font-family="Baskerville, Georgia, serif" font-size="7.5" letter-spacing="1.7">PEACH · CLAY · COCOA</text>
+              </svg>
+              <span class="painting-sheen" aria-hidden="true"></span>
+            </div>
+            <div class="sheet-foot">
+              <span>给「蜜桃拿铁」画的一张练习</span>
+              <em>afternoon light</em>
+            </div>
+          </div>
+
+          <div class="palette-note">
+            <div class="note-head"><span>WEEKLY PALETTE</span><span>NO. 05</span></div>
+            <h3>蜜桃拿铁</h3>
+            <p class="note-en">PEACH LATTE</p>
+            <div class="note-swatches" aria-hidden="true">
+              <i style="--c:#F7ECE0"></i><i style="--c:#E9BFA8"></i><i style="--c:#D78D74"></i><i style="--c:#B65E4A"></i><i style="--c:#6C4B42"></i>
+            </div>
+            <div class="note-foot"><span>奶油感 / INS 风</span><span>05 COLORS</span></div>
+          </div>
+
+          <div class="circle-badge" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <defs><path id="badgePath" d="M60,60 m-43,0 a43,43 0 1,1 86,0 a43,43 0 1,1 -86,0"/></defs>
+              <circle cx="60" cy="60" r="58" fill="#E9BFA8"/>
+              <circle cx="60" cy="60" r="32" fill="none" stroke="#1D1D1B" stroke-width=".8" opacity=".5"/>
+              <text fill="#1D1D1B" font-family="Arial, sans-serif" font-size="8.5" letter-spacing="2.05"><textPath href="#badgePath">WEEKLY COLOR DROP · 拾色手记 · </textPath></text>
+              <path d="M60 43c.6 10.4 3.9 13.6 14 14.5-10.1.9-13.4 4.1-14 14.5-.6-10.4-3.9-13.6-14-14.5 10.1-.9 13.4-4.1 14-14.5Z" fill="#1D1D1B"/>
+            </svg>
+          </div>
+
+          <span class="art-index" aria-hidden="true">INS STYLE / VOL.08</span>
+          <svg class="doodle-arrow" aria-hidden="true" viewBox="0 0 92 70"><path d="M4 8c25 2 54 16 66 42M57 38c9 1 15 0 23-4M69 48c2-5 6-9 11-14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <span class="doodle-label" aria-hidden="true">这组颜色<br>像不像午后？</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="正在流行的颜色">
+      <div class="ticker-track">
+        <div class="ticker-set">
+          <span><i style="--c:#E9BFA8"></i>蜜桃拿铁 <em>#E9BFA8</em></span><b>✳</b>
+          <span><i style="--c:#D96A45"></i>加州公路 <em>#D96A45</em></span><b>✳</b>
+          <span><i style="--c:#87BAB5"></i>海盐玻璃 <em>#87BAB5</em></span><b>✳</b>
+          <span><i style="--c:#98A58F"></i>雾中花园 <em>#98A58F</em></span><b>✳</b>
+          <span><i style="--c:#DCB766"></i>黄油吐司 <em>#DCB766</em></span><b>✳</b>
+          <span><i style="--c:#98613B"></i>旧电影夜 <em>#98613B</em></span><b>✳</b>
+        </div>
+        <div class="ticker-set" aria-hidden="true">
+          <span><i style="--c:#E9BFA8"></i>蜜桃拿铁 <em>#E9BFA8</em></span><b>✳</b>
+          <span><i style="--c:#D96A45"></i>加州公路 <em>#D96A45</em></span><b>✳</b>
+          <span><i style="--c:#87BAB5"></i>海盐玻璃 <em>#87BAB5</em></span><b>✳</b>
+          <span><i style="--c:#98A58F"></i>雾中花园 <em>#98A58F</em></span><b>✳</b>
+          <span><i style="--c:#DCB766"></i>黄油吐司 <em>#DCB766</em></span><b>✳</b>
+          <span><i style="--c:#98613B"></i>旧电影夜 <em>#98613B</em></span><b>✳</b>
+        </div>
+      </div>
+    </div>
+
+    <section class="section palettes" id="palettes">
+      <div class="container">
+        <header class="section-head">
+          <div class="section-heading reveal">
+            <p class="eyebrow"><span class="eyebrow-num">01</span> TRENDING PALETTES</p>
+            <h2>最近大家，<br>都在画这些颜色。</h2>
+          </div>
+          <div class="section-aside reveal">
+            <p>九组正在流行的配色，从热闹的橘到安静的灰。每一组都附上了名字、情绪和用色比例，挑一组，开始今天的画。</p>
+            <div class="filter-bar" role="group" aria-label="按风格筛选色卡">
+              <button class="filter-chip is-active" type="button" data-filter="all">全部 <sup>09</sup></button>
+              <button class="filter-chip" type="button" data-filter="ins">INS 风</button>
+              <button class="filter-chip" type="button" data-filter="cream">奶油感</button>
+              <button class="filter-chip" type="button" data-filter="morandi">莫兰迪</button>
+              <button class="filter-chip" type="button" data-filter="retro">复古胶片</button>
+              <button class="filter-chip" type="button" data-filter="fresh">日系清新</button>
+            </div>
+          </div>
+        </header>
+
+        <div class="palette-toolbar reveal">
+          <p><span class="status-dot" aria-hidden="true"></span><span id="resultCount">09</span> 组配色 · 点击色块，看看它的故事</p>
+          <button class="text-button" type="button" id="favoritesFilter" aria-pressed="false">
+            <svg class="icon"><use href="#i-heart"/></svg>
+            只看收藏 <span id="filterFavCount">0</span>
+          </button>
+        </div>
+
+        <div class="palette-grid" id="paletteGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <span class="empty-spark" aria-hidden="true">✳</span>
+          <h3>这里还空着，正好留给你。</h3>
+          <p>点亮喜欢的色卡右上角的小爱心，把它们收进自己的灵感册。</p>
+          <button class="button button--ink" type="button" id="resetFilters">去看看全部色卡 <svg class="icon"><use href="#i-arrow"/></svg></button>
+        </div>
+
+        <div class="palette-foot reveal">
+          <p>不是流行才好看，<br>是你喜欢的，才值得被画下来。</p>
+          <a href="#studio" class="circle-link">开始<br>配色 <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="interlude" aria-label="关于颜色的一句话">
+      <div class="container interlude-inner">
+        <div class="interlude-marks" aria-hidden="true">
+          <span style="--c:#D78D74"></span><span style="--c:#8A987C"></span><span style="--c:#E4D2A9"></span><span style="--c:#3D4E43"></span>
+        </div>
+        <blockquote class="reveal">
+          所谓好看的配色，<br>不过是你刚好<span class="soft-mark">看见了光</span>。
+        </blockquote>
+        <div class="interlude-note reveal">
+          <span>A NOTE ON COLOR</span>
+          <p>颜色没有标准答案。<br>它只是你看见世界的方式。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="studio" id="studio">
+      <div class="container">
+        <header class="studio-head">
+          <div class="reveal">
+            <p class="eyebrow eyebrow--light"><span class="eyebrow-num">02</span> YOUR COLOR LAB</p>
+            <h2>自己搭配一块<br><span class="studio-em">专属色卡</span>。</h2>
+          </div>
+          <p class="studio-lede reveal">点击任意色块选中它，再用左边色盘换色；也可以混合两色，或从流行色卡借一支。</p>
+        </header>
+
+        <div class="studio-grid">
+          <aside class="control-deck reveal" aria-label="调色工具">
+            <div class="deck-head">
+              <span>调色工具</span>
+              <span class="deck-head-en">COLOR MIXER / 01</span>
+            </div>
+
+            <div class="active-section">
+              <div class="control-label">
+                <span>当前选中的色块</span>
+                <span id="activeIndexLabel">NO. 01</span>
+              </div>
+              <div class="active-color-row">
+                <label class="color-well" id="colorWell" aria-label="打开系统色盘，选择当前色块的颜色">
+                  <input type="color" id="colorPicker" value="#F7ECE0">
+                  <span class="well-fill" id="wellFill"></span>
+                  <span class="well-label">打开<svg class="icon"><use href="#i-plus"/></svg></span>
+                </label>
+                <div class="active-info">
+                  <p class="active-name" id="activeName">奶油沫</p>
+                  <p class="active-hex" id="activeHex">#F7ECE0</p>
+                  <form class="hex-form" id="hexForm" novalidate>
+                    <label class="sr-only" for="hexInput">输入十六进制色值</label>
+                    <input id="hexInput" type="text" inputmode="text" maxlength="7" spellcheck="false" value="#F7ECE0" aria-describedby="hexHint">
+                    <button type="submit">应用</button>
+                  </form>
+                  <p class="hex-hint" id="hexHint">输入 6 位 HEX，按 Enter 应用</p>
+                </div>
+              </div>
+
+              <div class="inspiration-pick">
+                <div class="control-label"><span>从灵感里借一支</span><span>TAP TO PICK</span></div>
+                <div class="inspiration-dots" id="inspirationDots" role="group" aria-label="灵感色快捷取色"></div>
+              </div>
+            </div>
+
+            <div class="mix-section">
+              <div class="control-label mix-label">
+                <span>混合两支颜色</span>
+                <span class="mix-badge">MIX</span>
+              </div>
+              <div class="mix-inputs">
+                <label class="mix-swatch" aria-label="选择颜色 A">
+                  <input type="color" id="mixA" value="#E9BFA8">
+                  <span class="mix-fill" id="mixAFill"></span>
+                  <span class="mix-meta"><b>A</b><em id="mixAHex">#E9BFA8</em></span>
+                </label>
+                <span class="mix-plus" aria-hidden="true">+</span>
+                <label class="mix-swatch" aria-label="选择颜色 B">
+                  <input type="color" id="mixB" value="#6C4B42">
+                  <span class="mix-fill" id="mixBFill"></span>
+                  <span class="mix-meta"><b>B</b><em id="mixBHex">#6C4B42</em></span>
+                </label>
+              </div>
+              <div class="ratio-row">
+                <input type="range" id="mixRatio" min="0" max="100" value="50" aria-label="颜色混合比例">
+                <div class="ratio-labels"><span>A <b id="ratioA">50</b>%</span><span>B <b id="ratioB">50</b>%</span></div>
+              </div>
+              <div class="mix-result">
+                <span class="mix-result-color" id="mixResultColor"></span>
+                <div>
+                  <small>混合结果</small>
+                  <strong id="mixResultHex">#AA856D</strong>
+                </div>
+                <button type="button" id="addMixBtn" aria-label="用混合结果替换当前选中的色块">替换当前色块 <svg class="icon"><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+
+            <div class="deck-prompt">
+              <div>
+                <span class="prompt-kicker">TODAY'S PROMPT / 今日画题</span>
+                <p>用这五支颜色，画一个没有脸的下午。</p>
+              </div>
+              <span class="prompt-spark" aria-hidden="true">✳</span>
+            </div>
+
+            <p class="deck-footnote"><span>✳</span> 屏幕混色仅供搭配参考，真正调色时，请以颜料上手的效果为准。</p>
+          </aside>
+
+          <div class="palette-board-wrap reveal">
+            <div class="board-head">
+              <div><span class="board-kicker">CANVAS / 01</span><h3>我的配色画布</h3></div>
+              <div class="save-state" id="saveState"><span></span>已自动保存</div>
+            </div>
+
+            <div class="palette-board" id="paletteBoard" aria-label="我的五色画布"></div>
+
+            <div class="board-foot">
+              <div class="board-tip">
+                <span class="tip-icon"><svg class="icon"><use href="#i-spark"/></svg></span>
+                <p>一点小建议<br>先定主色，再添一笔亮的。</p>
+              </div>
+              <div class="board-actions">
+                <button class="icon-button" type="button" id="randomBtn" aria-label="随机生成一组配色" title="随机灵感"><svg class="icon"><use href="#i-shuffle"/></svg></button>
+                <button class="icon-button" type="button" id="copyBtn" aria-label="复制全部色值" title="复制全部色值"><svg class="icon"><use href="#i-copy"/></svg></button>
+                <button class="button button--cream" type="button" id="downloadBtn"><svg class="icon"><use href="#i-download"/></svg>下载这张色卡</button>
+              </div>
+            </div>
+
+            <div class="board-caption">
+              <span>拾色手记 · 自由搭配</span>
+              <span id="boardDate">AUTUMN 2026 / NO. 305</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="studio-notes" id="notes">
+          <div class="notes-heading reveal">
+            <span>03 / A LITTLE COLOR THEORY</span>
+            <h3>留一点白，<br>也留一点心跳。</h3>
+          </div>
+          <article class="note-card reveal">
+            <span class="note-num">60</span>
+            <h4>主色 · 画面的空气</h4>
+            <p>让一个颜色占到画面六成左右。它决定你走进这幅画时，最先感到的温度。</p>
+          </article>
+          <article class="note-card reveal">
+            <span class="note-num">30</span>
+            <h4>辅色 · 情绪的转折</h4>
+            <p>用三成上下的相邻色或对比色，给主色一点回应。冷与暖之间，需要一句对白。</p>
+          </article>
+          <article class="note-card reveal">
+            <span class="note-num">10</span>
+            <h4>点缀 · 想被看见的那一笔</h4>
+            <p>把最亮、最深或最饱和的颜色留给最后一成。它不用多，但别舍不得。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-intro reveal">
+          <a class="brand brand--footer" href="#top" aria-label="拾色手记，回到首页">
+            <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="brand-type"><strong>拾色手记</strong><small>HUE JOURNAL</small></span>
+          </a>
+          <h2>今天，想画点<br><span>什么颜色？</span></h2>
+          <a class="footer-cta" href="#studio">去调一张自己的色卡 <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
+
+        <div class="footer-right">
+          <div class="newsletter reveal">
+            <span class="footer-label">A LETTER IN COLOR / 色彩来信 · 演示</span>
+            <h3>偶尔，寄一封关于颜色的信。</h3>
+            <form id="newsletterForm" novalidate>
+              <label class="sr-only" for="newsletterEmail">你的邮箱</label>
+              <input id="newsletterEmail" type="email" placeholder="你的邮箱" autocomplete="email" required>
+              <button type="submit">订阅 <svg class="icon"><use href="#i-arrow"/></svg></button>
+            </form>
+            <p class="form-note" id="newsletterNote">演示表单：邮箱只保存在本机浏览器，不会发送邮件。</p>
+          </div>
+          <div class="footer-links reveal">
+            <div>
+              <span class="footer-label">EXPLORE</span>
+              <a href="#palettes">流行色卡</a>
+              <a href="#studio">自由调色</a>
+              <a href="#notes">配色小抄</a>
+            </div>
+            <div>
+              <span class="footer-label">FIND US</span>
+              <span class="footer-social">小红书</span>
+              <span class="footer-social">Instagram</span>
+              <span class="footer-social">Behance</span>
+            </div>
+            <div class="footer-color-stack" aria-hidden="true">
+              <i style="--c:#E9BFA8"></i><i style="--c:#D78D74"></i><i style="--c:#8A987C"></i><i style="--c:#3D4E43"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 拾色手记 HUE JOURNAL · 为爱画画的人而做</p>
+        <p>把颜色留在眼睛里，也留在画布上。<span aria-hidden="true">✳</span></p>
+        <a href="#top">回到顶部 <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="palette-dialog" id="paletteDialog" aria-labelledby="modalTitle">
+    <div class="dialog-shell">
+      <button class="dialog-close" id="modalClose" type="button" aria-label="关闭色卡详情"><svg class="icon"><use href="#i-close"/></svg></button>
+      <div class="dialog-visual" id="modalVisual"></div>
+      <div class="dialog-body">
+        <div class="dialog-title-row">
+          <div>
+            <p class="dialog-kicker" id="modalKicker">PALETTE NO. 01</p>
+            <h2 id="modalTitle">蜜桃拿铁</h2>
+            <p class="dialog-en" id="modalEn">PEACH LATTE</p>
+          </div>
+          <button class="dialog-fav" id="modalFav" type="button" aria-pressed="false" aria-label="收藏这份色卡">
+            <svg class="icon"><use href="#i-heart"/></svg><span>收藏</span>
+          </button>
+        </div>
+        <p class="dialog-desc" id="modalDesc"></p>
+        <blockquote class="dialog-quote" id="modalQuote"></blockquote>
+        <div class="proportion-block">
+          <div class="proportion-head"><span>画面建议比例</span><span>60 / 30 / 10 的变奏</span></div>
+          <div class="proportion-bar" id="modalProportion"></div>
+          <div class="proportion-labels" id="modalProportionLabels"></div>
+        </div>
+        <div class="dialog-tags" id="modalTags"></div>
+        <div class="dialog-actions">
+          <button class="button button--ink" type="button" id="usePaletteBtn">在调色台中打开 <svg class="icon"><use href="#i-arrow"/></svg></button>
+          <p><svg class="icon"><use href="#i-copy"/></svg> 点击上方颜色即可复制 HEX</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon"><svg class="icon"><use href="#i-check"/></svg></span>
+    <span id="toastMessage">已复制</span>
+  </div>
+<script>
+/* =========================================================
+   拾色手记 · HUE JOURNAL
+   Vanilla JS — palettes, colour mixing, favourites & export
+   ========================================================= */
+
+(() => {
+  "use strict";
+
+  const PALETTES = [
+    {
+      id: "peach-latte",
+      no: "01",
+      title: "蜜桃拿铁",
+      en: "PEACH LATTE",
+      tag: "奶油感 · INS 风",
+      categories: ["cream", "ins"],
+      hot: true,
+      colors: [
+        { name: "奶油沫", hex: "#F7ECE0" },
+        { name: "蜜桃肉", hex: "#E9BFA8" },
+        { name: "杏子糖", hex: "#D78D74" },
+        { name: "陶土红", hex: "#B65E4A" },
+        { name: "可可核", hex: "#6C4B42" }
+      ],
+      weights: [36, 26, 19, 12, 7],
+      desc: "像午后三点的咖啡馆：奶油桌布、蜜桃气泡水和一小块生巧。柔和的暖调里藏着一点可可棕，让画面甜而不腻。",
+      quote: "先用奶杏色铺满空气，再用陶土红画那只杯子。",
+      tags: ["温柔", "静物", "人物肤色", "咖啡馆"]
+    },
+    {
+      id: "california-route",
+      no: "02",
+      title: "加州公路",
+      en: "CALIFORNIA ROUTE",
+      tag: "复古胶片 · INS 风",
+      categories: ["retro", "ins"],
+      colors: [
+        { name: "日光黄", hex: "#F0C36B" },
+        { name: "落日橘", hex: "#E38A55" },
+        { name: "砖红", hex: "#B94E34" },
+        { name: "松林绿", hex: "#465B4D" },
+        { name: "暮色蓝", hex: "#2C4052" }
+      ],
+      weights: [18, 27, 20, 23, 12],
+      desc: "傍晚六点的公路电影。阳光把一切晒成蜂蜜色，松林和暮色压住暖橘，像一卷刚刚冲扫出来的旧胶片。",
+      quote: "大胆一点，让落日橘和松林绿在画面里相遇。",
+      tags: ["热烈", "风景", "公路旅行", "高对比"]
+    },
+    {
+      id: "sea-glass",
+      no: "03",
+      title: "海盐玻璃",
+      en: "SEA GLASS",
+      tag: "日系清新 · INS 风",
+      categories: ["fresh", "ins"],
+      colors: [
+        { name: "雾白", hex: "#EAF2ED" },
+        { name: "浅海", hex: "#BFDAD3" },
+        { name: "海盐", hex: "#87BAB5" },
+        { name: "青灰", hex: "#4F8085" },
+        { name: "深海", hex: "#26474E" }
+      ],
+      weights: [30, 24, 21, 16, 9],
+      desc: "潮湿的风、被海水磨圆的玻璃，还有晾在阳台上的白衬衫。清透的蓝绿里保留一点灰，画面才安静得下来。",
+      quote: "把最深的那一笔留给水面，它会替画面呼吸。",
+      tags: ["清透", "海景", "玻璃质感", "水彩"]
+    },
+    {
+      id: "misty-garden",
+      no: "04",
+      title: "雾中花园",
+      en: "MISTY GARDEN",
+      tag: "莫兰迪",
+      categories: ["morandi"],
+      colors: [
+        { name: "燕麦", hex: "#DDD9CD" },
+        { name: "雾灰", hex: "#B7B7A3" },
+        { name: "苔藓", hex: "#98A58F" },
+        { name: "雾林", hex: "#758270" },
+        { name: "岩绿", hex: "#586157" }
+      ],
+      weights: [30, 25, 20, 15, 10],
+      desc: "下过雨的清晨，叶片上还挂着水。所有颜色都往灰里退了一步，于是花园显得更远、更深，也更耐看。",
+      quote: "别急着提亮，灰调里也有很长的故事。",
+      tags: ["安静", "植物", "莫兰迪", "低饱和"]
+    },
+    {
+      id: "butter-toast",
+      no: "05",
+      title: "黄油吐司",
+      en: "BUTTER TOAST",
+      tag: "奶油感",
+      categories: ["cream"],
+      colors: [
+        { name: "奶霜", hex: "#FAF0D4" },
+        { name: "黄油", hex: "#F1DBA2" },
+        { name: "蜂蜜", hex: "#DCB766" },
+        { name: "焦糖", hex: "#AB7D43" },
+        { name: "烤榛", hex: "#624A2E" }
+      ],
+      weights: [37, 25, 18, 13, 7],
+      desc: "早餐桌上的一块厚吐司，黄油正慢慢融化。整组颜色像一段被拉长的早晨，松软、明亮，又带着烘烤后的脆边。",
+      quote: "大面积留给奶霜色，最后点一笔焦糖就够香。",
+      tags: ["治愈", "早餐", "暖调", "食物插画"]
+    },
+    {
+      id: "cinema-night",
+      no: "06",
+      title: "旧电影夜",
+      en: "CINEMA NIGHT",
+      tag: "复古胶片",
+      categories: ["retro", "morandi"],
+      colors: [
+        { name: "旧纸", hex: "#E8D4B4" },
+        { name: "琥珀", hex: "#CAA36A" },
+        { name: "胶片棕", hex: "#98613B" },
+        { name: "夜蓝", hex: "#374A52" },
+        { name: "黑场", hex: "#161F26" }
+      ],
+      weights: [14, 20, 25, 26, 15],
+      desc: "散场后的最后一排座位。放映机的暖光落在幕布上，而房间已经暗下来。琥珀色和夜蓝，是这部电影的两种呼吸。",
+      quote: "用夜蓝把画面压暗，让琥珀色自己发光。",
+      tags: ["电影感", "夜景", "氛围", "厚涂"]
+    },
+    {
+      id: "strawberry-atelier",
+      no: "07",
+      title: "草莓画室",
+      en: "STRAWBERRY ATELIER",
+      tag: "INS 风 · 奶油感",
+      categories: ["ins", "cream"],
+      colors: [
+        { name: "奶油粉", hex: "#F9E9E4" },
+        { name: "草莓奶", hex: "#EDBDC3" },
+        { name: "玫瑰酱", hex: "#D995A2" },
+        { name: "莓果", hex: "#AE526C" },
+        { name: "酒渍", hex: "#692C42" }
+      ],
+      weights: [30, 23, 22, 16, 9],
+      desc: "画室里沾了颜料的围裙，和一杯喝到一半的莓果气泡水。甜粉并不幼稚，加上酒红，就多了成熟的余味。",
+      quote: "粉色不用躲，配一点酒红，它会更像自己。",
+      tags: ["甜美", "花卉", "人物", "少女感"]
+    },
+    {
+      id: "lime-picnic",
+      no: "08",
+      title: "青柠野餐",
+      en: "LIME PICNIC",
+      tag: "日系清新",
+      categories: ["fresh"],
+      colors: [
+        { name: "青柠汽", hex: "#F4F3DC" },
+        { name: "嫩芽", hex: "#DFE2B2" },
+        { name: "抹茶", hex: "#B8C77E" },
+        { name: "草甸", hex: "#7C9257" },
+        { name: "森林", hex: "#3E5138" }
+      ],
+      weights: [30, 24, 21, 15, 10],
+      desc: "格子野餐垫、切开的青柠和风吹过的草地。绿色从浅到深排成一条小路，邀请你往画面的更深处走。",
+      quote: "让嫩芽色占多数，森林绿只用在影子里。",
+      tags: ["清爽", "自然", "草地", "春天"]
+    },
+    {
+      id: "pink-haze",
+      no: "09",
+      title: "灰粉雾",
+      en: "PINK HAZE",
+      tag: "莫兰迪 · 胶片",
+      categories: ["morandi", "retro"],
+      colors: [
+        { name: "晨雾", hex: "#EAE2DF" },
+        { name: "藕灰", hex: "#D8C9CC" },
+        { name: "烟粉", hex: "#B9A8B1" },
+        { name: "干梅", hex: "#988390" },
+        { name: "岩紫", hex: "#675B66" }
+      ],
+      weights: [31, 23, 20, 16, 10],
+      desc: "天刚亮时，城市还没有完全醒。粉色被雾气过滤了一遍，变成柔软的灰紫，适合画那些不必说清楚的情绪。",
+      quote: "最轻的颜色放在远处，画面就有了呼吸的距离。",
+      tags: ["朦胧", "情绪", "人物肖像", "低对比"]
+    }
+  ];
+
+  const INSPIRATION = [
+    { name: "奶油沫", hex: "#F7ECE0" },
+    { name: "蜜桃肉", hex: "#E9BFA8" },
+    { name: "杏子糖", hex: "#D78D74" },
+    { name: "陶土红", hex: "#B65E4A" },
+    { name: "日光黄", hex: "#F0C36B" },
+    { name: "砖红", hex: "#B94E34" },
+    { name: "松林绿", hex: "#465B4D" },
+    { name: "浅海", hex: "#BFDAD3" },
+    { name: "青灰", hex: "#4F8085" },
+    { name: "雾灰", hex: "#B7B7A3" },
+    { name: "玫瑰酱", hex: "#D995A2" },
+    { name: "烟粉", hex: "#B9A8B1" }
+  ];
+
+  const STORAGE_KEYS = {
+    favorites: "shise.favorites.v1",
+    palette: "shise.palette.v1",
+    letter: "shise.letter.v1"
+  };
+
+  const FALLBACK_PALETTE = PALETTES[0].colors.map((color) => ({ ...color }));
+
+  const dom = {};
+  const state = {
+    filter: "all",
+    favoritesOnly: false,
+    favorites: new Set(),
+    palette: FALLBACK_PALETTE,
+    selected: 0,
+    activeModal: null,
+    toastTimer: null,
+    saveTimer: null
+  };
+
+  /* ---------- utilities ---------- */
+
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const pad2 = (value) => String(value).padStart(2, "0");
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  function scrollToElement(element) {
+    if (!element) return;
+    element.scrollIntoView({
+      behavior: reducedMotion.matches ? "auto" : "smooth",
+      block: "start"
+    });
+  }
+
+  function readStorage(key, fallback) {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : fallback;
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  function writeStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function normalizeHex(input) {
+    if (typeof input !== "string") return null;
+    let value = input.trim().replace(/^#/, "");
+    if (/^[0-9a-f]{3}$/i.test(value)) {
+      value = value
+        .split("")
+        .map((char) => char + char)
+        .join("");
+    }
+    if (!/^[0-9a-f]{6}$/i.test(value)) return null;
+    return `#${value.toUpperCase()}`;
+  }
+
+  function hexToRgb(hex) {
+    const clean = normalizeHex(hex) || "#000000";
+    return {
+      r: parseInt(clean.slice(1, 3), 16),
+      g: parseInt(clean.slice(3, 5), 16),
+      b: parseInt(clean.slice(5, 7), 16)
+    };
+  }
+
+  function rgbToHex(r, g, b) {
+    const toHex = (channel) =>
+      clamp(Math.round(channel), 0, 255).toString(16).padStart(2, "0");
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+  }
+
+  function rgbToHsl(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    const red = r / 255;
+    const green = g / 255;
+    const blue = b / 255;
+    const max = Math.max(red, green, blue);
+    const min = Math.min(red, green, blue);
+    const delta = max - min;
+    let h = 0;
+
+    if (delta !== 0) {
+      if (max === red) h = ((green - blue) / delta) % 6;
+      else if (max === green) h = (blue - red) / delta + 2;
+      else h = (red - green) / delta + 4;
+      h *= 60;
+      if (h < 0) h += 360;
+    }
+
+    const l = (max + min) / 2;
+    const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    return { h, s: s * 100, l: l * 100 };
+  }
+
+  function relativeLuminance(hex) {
+    const { r, g, b } = hexToRgb(hex);
+    const linear = [r, g, b].map((channel) => {
+      const c = channel / 255;
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+  }
+
+  function labelColor(hex) {
+    return relativeLuminance(hex) > 0.44 ? "#1D1E1A" : "#F7F0E3";
+  }
+
+  function autoColorName(hex) {
+    const { h, s, l } = rgbToHsl(hex);
+
+    if (s < 7 || l > 95) return "月白";
+    if (s < 15 && l > 76) return "雾白";
+    if (l > 88 && s < 30) return "奶油白";
+    if (l < 17) return "墨黑";
+
+    const bases = [
+      [0, "陶红"],
+      [15, "珊瑚"],
+      [32, "杏橘"],
+      [48, "琥珀"],
+      [64, "鹅黄"],
+      [83, "青柠"],
+      [106, "草绿"],
+      [141, "鼠尾草"],
+      [165, "薄荷"],
+      [184, "海盐"],
+      [202, "湖蓝"],
+      [222, "群青"],
+      [245, "鸢尾"],
+      [266, "香芋"],
+      [287, "藕紫"],
+      [313, "莓粉"],
+      [335, "酒红"],
+      [360, "陶红"]
+    ];
+
+    let base = bases[bases.length - 1][1];
+    for (let index = 1; index < bases.length; index += 1) {
+      if (h < bases[index][0]) {
+        base = bases[index - 1][1];
+        break;
+      }
+    }
+
+    if (s < 20) return `雾${base}`;
+    if (l < 27) return `深${base}`;
+    if (l > 78) return `浅${base}`;
+    if (s > 68) return `鲜${base}`;
+    if (l > 63) return `柔${base}`;
+    return base;
+  }
+
+  function mixColors(hexA, hexB, ratioA) {
+    const a = hexToRgb(hexA);
+    const b = hexToRgb(hexB);
+    const weightA = clamp(ratioA, 0, 100) / 100;
+    return rgbToHex(
+      a.r * weightA + b.r * (1 - weightA),
+      a.g * weightA + b.g * (1 - weightA),
+      a.b * weightA + b.b * (1 - weightA)
+    );
+  }
+
+  function escapeHTML(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function getPalette(id) {
+    return PALETTES.find((palette) => palette.id === id);
+  }
+
+  function seasonLabel(date) {
+    const month = date.getMonth() + 1;
+    if (month >= 3 && month <= 5) return "SPRING";
+    if (month >= 6 && month <= 8) return "SUMMER";
+    if (month >= 9 && month <= 11) return "AUTUMN";
+    return "WINTER";
+  }
+
+  function dayOfYear(date) {
+    const start = new Date(date.getFullYear(), 0, 1);
+    return Math.floor((date - start) / 86400000) + 1;
+  }
+
+  function dateStamp(date = new Date()) {
+    return `${date.getFullYear()}.${pad2(date.getMonth() + 1)}.${pad2(date.getDate())}`;
+  }
+
+  /* ---------- toast & clipboard ---------- */
+
+  function showToast(message) {
+    if (!dom.toast) return;
+    window.clearTimeout(state.toastTimer);
+    dom.toastMessage.textContent = message;
+    dom.toast.classList.add("is-visible");
+    state.toastTimer = window.setTimeout(() => {
+      dom.toast.classList.remove("is-visible");
+    }, 2600);
+  }
+
+  function legacyCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+    let success = false;
+    try {
+      success = document.execCommand("copy");
+    } catch (error) {
+      success = false;
+    }
+    textarea.remove();
+    return success;
+  }
+
+  async function copyText(text, message) {
+    const value = String(text);
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+      } else if (!legacyCopy(value)) {
+        throw new Error("Clipboard unavailable");
+      }
+      showToast(message || `已复制 ${value}`);
+    } catch (error) {
+      if (legacyCopy(value)) {
+        showToast(message || `已复制 ${value}`);
+      } else {
+        showToast("复制失败，请长按色值手动复制");
+      }
+    }
+  }
+
+  /* ---------- favourites ---------- */
+
+  function loadFavorites() {
+    const stored = readStorage(STORAGE_KEYS.favorites, []);
+    if (!Array.isArray(stored)) return new Set();
+    const validIds = new Set(PALETTES.map((palette) => palette.id));
+    return new Set(stored.filter((id) => validIds.has(id)));
+  }
+
+  function updateFavoriteCounts() {
+    const count = state.favorites.size;
+    [dom.headerFavCount, dom.mobileFavCount, dom.filterFavCount].forEach((node) => {
+      if (node) node.textContent = String(count);
+    });
+  }
+
+  function syncFavoritesUI() {
+    $$("[data-like]").forEach((button) => {
+      const id = button.dataset.like;
+      const palette = getPalette(id);
+      const isLiked = state.favorites.has(id);
+      button.classList.toggle("is-liked", isLiked);
+      button.setAttribute("aria-pressed", String(isLiked));
+      button.setAttribute(
+        "aria-label",
+        `${isLiked ? "取消收藏" : "收藏"}「${palette ? palette.title : "色卡"}」`
+      );
+      button.title = isLiked ? "取消收藏" : "收藏这份色卡";
+    });
+    updateFavoriteCounts();
+  }
+
+  function syncModalFavorite() {
+    if (!state.activeModal) return;
+    const isLiked = state.favorites.has(state.activeModal);
+    dom.modalFav.classList.toggle("is-liked", isLiked);
+    dom.modalFav.setAttribute("aria-pressed", String(isLiked));
+    dom.modalFav.setAttribute("aria-label", isLiked ? "取消收藏这份色卡" : "收藏这份色卡");
+    dom.modalFav.querySelector("span").textContent = isLiked ? "已收藏" : "收藏";
+  }
+
+  function toggleFavorite(id) {
+    const palette = getPalette(id);
+    if (!palette) return;
+    const wasLiked = state.favorites.has(id);
+    if (wasLiked) state.favorites.delete(id);
+    else state.favorites.add(id);
+    writeStorage(STORAGE_KEYS.favorites, Array.from(state.favorites));
+    syncFavoritesUI();
+    if (state.activeModal === id) syncModalFavorite();
+    if (state.favoritesOnly) renderPalettes();
+    showToast(
+      wasLiked ? `已从收藏中移除「${palette.title}」` : `已收藏「${palette.title}」`
+    );
+  }
+
+  /* ---------- palette gallery ---------- */
+
+  function swatchMarkup(color, index) {
+    const hex = color.hex.toUpperCase();
+    return `
+      <span class="swatch" style="--swatch:${hex};--label:${labelColor(hex)}">
+        <span class="swatch-top">${pad2(index + 1)}</span>
+        <span class="swatch-label">
+          <span class="swatch-name">${escapeHTML(color.name)}</span>
+          <b class="swatch-hex">${hex}</b>
+        </span>
+      </span>`;
+  }
+
+  function cardMarkup(palette) {
+    const liked = state.favorites.has(palette.id);
+    const swatches = palette.colors.map(swatchMarkup).join("");
+    const hotMarkup = palette.hot
+      ? `<span class="hot-tag"><svg class="icon"><use href="#i-spark"/></svg>本周高赞</span>`
+      : "";
+
+    return `
+      <article class="palette-card" data-id="${palette.id}" style="--card-index:${Number(palette.no) - 1}">
+        <div class="card-visual-wrap">
+          <button class="card-visual" type="button" data-open="${palette.id}" aria-label="查看「${palette.title}」配色详情">
+            ${swatches}
+            ${hotMarkup}
+            <span class="view-badge" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up"/></svg></span>
+          </button>
+        </div>
+        <div class="palette-info">
+          <div>
+            <p class="palette-cat"><i aria-hidden="true"></i>${palette.tag}</p>
+            <h3>${palette.title}<svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></h3>
+            <p class="palette-en">${palette.en}</p>
+          </div>
+          <div class="palette-side">
+            <span class="palette-count">05 COLORS</span>
+            <button class="like-button${liked ? " is-liked" : ""}" type="button" data-like="${palette.id}" aria-pressed="${liked}" aria-label="${liked ? "取消收藏" : "收藏"}「${palette.title}」" title="${liked ? "取消收藏" : "收藏这份色卡"}">
+              <svg class="icon"><use href="#i-heart"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderPalettes() {
+    const visible = PALETTES.filter((palette) => {
+      const matchesCategory =
+        state.filter === "all" || palette.categories.includes(state.filter);
+      const matchesFavorites = !state.favoritesOnly || state.favorites.has(palette.id);
+      return matchesCategory && matchesFavorites;
+    });
+
+    dom.paletteGrid.innerHTML = visible.map(cardMarkup).join("");
+    dom.resultCount.textContent = pad2(visible.length);
+    dom.emptyState.hidden = visible.length !== 0;
+
+    $$(".filter-chip").forEach((chip) => {
+      const isActive = chip.dataset.filter === state.filter;
+      chip.classList.toggle("is-active", isActive);
+      chip.setAttribute("aria-pressed", String(isActive));
+    });
+
+    dom.favoritesFilter.setAttribute("aria-pressed", String(state.favoritesOnly));
+    syncFavoritesUI();
+  }
+
+  function enterFavoritesView(options = {}) {
+    state.favoritesOnly = true;
+    state.filter = "all";
+    renderPalettes();
+    if (options.scroll !== false) {
+      scrollToElement(dom.palettesSection);
+    }
+  }
+
+  function resetFilters(options = {}) {
+    state.favoritesOnly = false;
+    state.filter = "all";
+    renderPalettes();
+    if (options.scroll === false) return;
+    scrollToElement(dom.paletteGrid);
+  }
+
+  function initGallery() {
+    renderPalettes();
+
+    $$(".filter-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        state.filter = chip.dataset.filter;
+        state.favoritesOnly = false;
+        renderPalettes();
+      });
+    });
+
+    dom.favoritesFilter.addEventListener("click", () => {
+      if (state.favoritesOnly) {
+        resetFilters({ scroll: false });
+      } else {
+        enterFavoritesView({ scroll: false });
+      }
+    });
+
+    dom.headerFavorites.addEventListener("click", () => {
+      closeMobileMenu();
+      enterFavoritesView();
+    });
+
+    dom.mobileFavorites.addEventListener("click", () => {
+      closeMobileMenu();
+      enterFavoritesView();
+    });
+
+    dom.resetFilters.addEventListener("click", () => resetFilters({ scroll: false }));
+
+    dom.paletteGrid.addEventListener("click", (event) => {
+      const likeButton = event.target.closest("[data-like]");
+      if (likeButton) {
+        toggleFavorite(likeButton.dataset.like);
+        return;
+      }
+      const card = event.target.closest(".palette-card");
+      if (card) openPalette(card.dataset.id);
+    });
+  }
+
+  /* ---------- palette dialog ---------- */
+
+  function modalSwatchMarkup(color, index) {
+    const hex = color.hex.toUpperCase();
+    return `
+      <button class="modal-swatch" type="button" data-copy-hex="${hex}" style="--c:${hex};--label:${labelColor(hex)}" aria-label="复制 ${escapeHTML(color.name)} 的色值 ${hex}">
+        <span class="modal-swatch-top">
+          <span>${pad2(index + 1)} / 05</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+        </span>
+        <span class="modal-swatch-label">
+          <span class="modal-swatch-name">${escapeHTML(color.name)}</span>
+          <span class="modal-swatch-hex">${hex}</span>
+        </span>
+      </button>`;
+  }
+
+  function openPalette(id) {
+    const palette = getPalette(id);
+    if (!palette) return;
+
+    state.activeModal = id;
+    dom.modalKicker.textContent = `PALETTE NO. ${palette.no} / ${palette.en}`;
+    dom.modalTitle.textContent = palette.title;
+    dom.modalEn.textContent = palette.en;
+    dom.modalDesc.textContent = palette.desc;
+    dom.modalQuote.textContent = `“${palette.quote}”`;
+    dom.modalVisual.innerHTML = palette.colors
+      .map((color, index) => modalSwatchMarkup(color, index))
+      .join("");
+    dom.modalProportion.innerHTML = palette.colors
+      .map(
+        (color, index) =>
+          `<span style="flex:${palette.weights[index]} 1 0;background:${color.hex.toUpperCase()}"></span>`
+      )
+      .join("");
+    dom.modalProportionLabels.innerHTML = palette.colors
+      .map(
+        (color, index) =>
+          `<span style="flex:${palette.weights[index]} 1 0">${palette.weights[index]}%</span>`
+      )
+      .join("");
+    dom.modalTags.innerHTML = palette.tags
+      .map((tag) => `<span>${escapeHTML(tag)}</span>`)
+      .join("");
+    syncModalFavorite();
+
+    document.body.classList.add("is-locked");
+    dom.dialog.setAttribute("tabindex", "-1");
+    if (typeof dom.dialog.showModal === "function") {
+      if (!dom.dialog.open) dom.dialog.showModal();
+    } else {
+      dom.dialog.setAttribute("open", "");
+    }
+    dom.dialog.scrollTop = 0;
+    try {
+      dom.dialog.focus({ preventScroll: true });
+    } catch (error) {
+      dom.dialog.focus();
+    }
+  }
+
+  function closePalette() {
+    if (typeof dom.dialog.close === "function" && dom.dialog.open) {
+      dom.dialog.close();
+    } else {
+      dom.dialog.removeAttribute("open");
+      document.body.classList.remove("is-locked");
+      state.activeModal = null;
+    }
+  }
+
+  function useActivePalette() {
+    const palette = getPalette(state.activeModal);
+    if (!palette) return;
+    state.palette = palette.colors.map((color) => ({ ...color }));
+    state.selected = 0;
+    renderBoard();
+    updateActiveControls();
+    persistPaletteNow();
+    closePalette();
+    showToast(`已把「${palette.title}」放进调色台`);
+    window.setTimeout(() => {
+      scrollToElement(dom.studioSection);
+    }, 120);
+  }
+
+  function initDialog() {
+    dom.modalClose.addEventListener("click", closePalette);
+
+    dom.dialog.addEventListener("click", (event) => {
+      if (event.target === dom.dialog) closePalette();
+    });
+
+    dom.dialog.addEventListener("close", () => {
+      document.body.classList.remove("is-locked");
+      state.activeModal = null;
+    });
+
+    dom.dialog.addEventListener("cancel", () => {
+      document.body.classList.remove("is-locked");
+    });
+
+    dom.modalFav.addEventListener("click", () => {
+      if (state.activeModal) toggleFavorite(state.activeModal);
+    });
+
+    dom.modalVisual.addEventListener("click", (event) => {
+      const swatch = event.target.closest("[data-copy-hex]");
+      if (!swatch) return;
+      copyText(swatch.dataset.copyHex, `已复制 ${swatch.dataset.copyHex}`);
+    });
+
+    dom.usePaletteBtn.addEventListener("click", useActivePalette);
+  }
+
+  /* ---------- colour board ---------- */
+
+  function isValidSavedPalette(value) {
+    return (
+      Array.isArray(value) &&
+      value.length === 5 &&
+      value.every(
+        (color) =>
+          color &&
+          normalizeHex(color.hex) &&
+          typeof color.name === "string" &&
+          color.name.length > 0
+      )
+    );
+  }
+
+  function loadSavedPalette() {
+    const stored = readStorage(STORAGE_KEYS.palette, null);
+    if (!stored || !isValidSavedPalette(stored.colors)) return;
+    state.palette = stored.colors.map((color) => ({
+      hex: normalizeHex(color.hex),
+      name: color.name
+    }));
+    state.selected = Number.isInteger(stored.selected)
+      ? clamp(stored.selected, 0, 4)
+      : 0;
+  }
+
+  function setSaveStatus(text, saving = false) {
+    if (!dom.saveState) return;
+    dom.saveState.classList.toggle("is-saving", saving);
+    dom.saveState.innerHTML = `<span></span>${escapeHTML(text)}`;
+  }
+
+  function persistPaletteNow() {
+    window.clearTimeout(state.saveTimer);
+    const saved = writeStorage(STORAGE_KEYS.palette, {
+      colors: state.palette,
+      selected: state.selected,
+      savedAt: Date.now()
+    });
+    setSaveStatus(saved ? "已自动保存" : "仅保存在本次浏览", false);
+  }
+
+  function queuePaletteSave() {
+    setSaveStatus("正在保存…", true);
+    window.clearTimeout(state.saveTimer);
+    state.saveTimer = window.setTimeout(() => {
+      persistPaletteNow();
+    }, 380);
+  }
+
+  function boardSwatchMarkup(color, index) {
+    const hex = color.hex.toUpperCase();
+    return `
+      <div class="canvas-swatch${index === state.selected ? " is-selected" : ""}" role="button" tabindex="0" data-index="${index}" style="--c:${hex};--label:${labelColor(hex)}" aria-label="色块 ${pad2(index + 1)}，${escapeHTML(color.name)}，${hex}${index === state.selected ? "，正在编辑" : "，点击编辑"}">
+        <span class="canvas-top">
+          <span>${pad2(index + 1)}</span>
+          <span class="canvas-selected-tag">正在编辑</span>
+        </span>
+        <button class="canvas-remove" type="button" data-copy-board="${hex}" aria-label="复制 ${hex}" title="复制这个色值">
+          <svg class="icon"><use href="#i-copy"/></svg>
+        </button>
+        <span class="canvas-label">
+          <span class="canvas-name">${escapeHTML(color.name)}</span>
+          <span class="canvas-hex">${hex}</span>
+        </span>
+      </div>`;
+  }
+
+  function renderBoard() {
+    dom.paletteBoard.innerHTML = state.palette
+      .slice(0, 5)
+      .map(boardSwatchMarkup)
+      .join("");
+    dom.paletteBoard.setAttribute(
+      "aria-label",
+      `我的五色画布。当前选中第 ${state.selected + 1} 个色块。`
+    );
+  }
+
+  function activeColor() {
+    return state.palette[state.selected] || state.palette[0];
+  }
+
+  function updateActiveControls() {
+    const color = activeColor();
+    if (!color) return;
+    const hex = color.hex.toUpperCase();
+    dom.wellFill.style.background = hex;
+    dom.colorPicker.value = hex;
+    dom.activeName.textContent = color.name;
+    dom.activeHex.textContent = hex;
+    dom.activeIndexLabel.textContent = `NO. ${pad2(state.selected + 1)}`;
+    if (document.activeElement !== dom.hexInput) dom.hexInput.value = hex;
+    dom.hexForm.classList.remove("is-invalid");
+    dom.hexInput.removeAttribute("aria-invalid");
+    dom.hexHint.classList.remove("is-error");
+    dom.hexHint.textContent = "输入 6 位 HEX，按 Enter 应用";
+  }
+
+  function selectSwatch(index) {
+    state.selected = clamp(index, 0, state.palette.length - 1);
+    renderBoard();
+    updateActiveControls();
+    queuePaletteSave();
+    const color = activeColor();
+    if (color) showToast(`正在编辑 NO.${pad2(state.selected + 1)} · ${color.name}`);
+  }
+
+  function applyColor(hex, name) {
+    const normalized = normalizeHex(hex);
+    if (!normalized) return false;
+    state.palette[state.selected] = {
+      hex: normalized,
+      name: name || autoColorName(normalized)
+    };
+    renderBoard();
+    updateActiveControls();
+    queuePaletteSave();
+    return true;
+  }
+
+  function renderInspirationDots() {
+    dom.inspirationDots.innerHTML = INSPIRATION.map((color, index) => {
+      const hex = color.hex.toUpperCase();
+      return `
+        <button class="inspiration-dot" type="button" data-inspiration="${hex}" data-name="${escapeHTML(color.name)}" style="--c:${hex}" aria-label="取用${escapeHTML(color.name)} ${hex}" title="${escapeHTML(color.name)} · ${hex}"></button>`;
+    }).join("");
+  }
+
+  function initBoard() {
+    renderInspirationDots();
+    renderBoard();
+    updateActiveControls();
+
+    dom.paletteBoard.addEventListener("click", (event) => {
+      const copyButton = event.target.closest("[data-copy-board]");
+      if (copyButton) {
+        event.stopPropagation();
+        copyText(copyButton.dataset.copyBoard, `已复制 ${copyButton.dataset.copyBoard}`);
+        return;
+      }
+      const swatch = event.target.closest("[data-index]");
+      if (swatch) selectSwatch(Number(swatch.dataset.index));
+    });
+
+    dom.paletteBoard.addEventListener("keydown", (event) => {
+      if (event.target.closest("[data-copy-board]")) return;
+      const swatch = event.target.closest("[data-index]");
+      if (!swatch) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectSwatch(Number(swatch.dataset.index));
+      }
+    });
+
+    dom.colorPicker.addEventListener("input", () => {
+      applyColor(dom.colorPicker.value, autoColorName(dom.colorPicker.value));
+    });
+
+    dom.hexForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const normalized = normalizeHex(dom.hexInput.value);
+      if (!normalized) {
+        dom.hexForm.classList.add("is-invalid");
+        dom.hexInput.setAttribute("aria-invalid", "true");
+        dom.hexHint.classList.add("is-error");
+        dom.hexHint.textContent = "色值格式不对，试试 #E9BFA8";
+        dom.hexInput.focus();
+        return;
+      }
+      hexFormApply(normalized);
+    });
+
+    dom.hexInput.addEventListener("input", () => {
+      dom.hexInput.removeAttribute("aria-invalid");
+      dom.hexForm.classList.remove("is-invalid");
+      dom.hexHint.classList.remove("is-error");
+      dom.hexHint.textContent = "输入 6 位 HEX，按 Enter 应用";
+    });
+
+    dom.inspirationDots.addEventListener("click", (event) => {
+      const dot = event.target.closest("[data-inspiration]");
+      if (!dot) return;
+      const hex = dot.dataset.inspiration;
+      applyColor(hex, dot.dataset.name);
+      showToast(`取用了「${dot.dataset.name}」${hex}`);
+    });
+
+    dom.randomBtn.addEventListener("click", () => {
+      const current = state.palette.map((color) => color.hex).join("|");
+      const choices = PALETTES.filter(
+        (palette) => palette.colors.map((color) => color.hex).join("|") !== current
+      );
+      const next = choices[Math.floor(Math.random() * choices.length)] || PALETTES[0];
+      state.palette = next.colors.map((color) => ({ ...color }));
+      state.selected = 0;
+      renderBoard();
+      updateActiveControls();
+      queuePaletteSave();
+      showToast(`换上了「${next.title}」的灵感`);
+    });
+
+    dom.copyBtn.addEventListener("click", () => {
+      const text = state.palette
+        .slice(0, 5)
+        .map((color, index) => `${pad2(index + 1)} ${color.name} ${color.hex.toUpperCase()}`)
+        .join("\n");
+      copyText(text, "五支颜色已复制");
+    });
+
+    dom.downloadBtn.addEventListener("click", downloadPoster);
+
+    setSaveStatus("已自动保存", false);
+    renderBoardDate();
+  }
+
+  function hexFormApply(normalized) {
+    applyColor(normalized, autoColorName(normalized));
+    dom.hexInput.value = normalized;
+    dom.hexHint.textContent = `已应用 ${normalized}`;
+    showToast(`已应用 ${normalized}`);
+    dom.hexInput.blur();
+  }
+
+  function renderBoardDate() {
+    const now = new Date();
+    dom.boardDate.textContent = `${seasonLabel(now)} ${now.getFullYear()} / NO. ${String(
+      dayOfYear(now)
+    ).padStart(3, "0")}`;
+  }
+
+  /* ---------- mixer ---------- */
+
+  function updateMixer() {
+    const a = normalizeHex(dom.mixA.value) || "#E9BFA8";
+    const b = normalizeHex(dom.mixB.value) || "#6C4B42";
+    const ratio = Number(dom.mixRatio.value);
+    const result = mixColors(a, b, ratio);
+
+    dom.mixAFill.style.background = a;
+    dom.mixBFill.style.background = b;
+    dom.mixAHex.textContent = a;
+    dom.mixBHex.textContent = b;
+    dom.mixResultColor.style.background = result;
+    dom.mixResultHex.textContent = result;
+    dom.ratioA.textContent = String(ratio);
+    dom.ratioB.textContent = String(100 - ratio);
+    dom.ratioRow.style.setProperty("--mix-a", a);
+    dom.ratioRow.style.setProperty("--mix-b", b);
+    dom.mixResult.dataset.result = result;
+  }
+
+  function initMixer() {
+    updateMixer();
+    [dom.mixA, dom.mixB, dom.mixRatio].forEach((element) => {
+      element.addEventListener("input", updateMixer);
+    });
+
+    dom.addMixBtn.addEventListener("click", () => {
+      const result = dom.mixResult.dataset.result || dom.mixResultHex.textContent;
+      const name = autoColorName(result);
+      applyColor(result, name);
+      showToast(`已用「${name}」替换 NO.${pad2(state.selected + 1)}`);
+    });
+  }
+
+  /* ---------- poster export ---------- */
+
+  function loadImage() {
+    return new Promise((resolve) => {
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(resolve, resolve);
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  function drawPoster() {
+    const canvas = document.createElement("canvas");
+    const width = 1080;
+    const height = 1350;
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(ratio, ratio);
+
+    const now = new Date();
+    const colors = state.palette.slice(0, 5);
+    const paper = "#F4EFE4";
+    const ink = "#1D1E1A";
+    const muted = "#756D61";
+    const serif = '"Noto Serif SC", "Songti SC", "SimSun", serif';
+    const sans = '"Noto Sans SC", "Microsoft YaHei", sans-serif';
+    const mono = '"Cascadia Mono", "Courier New", monospace';
+
+    ctx.fillStyle = paper;
+    ctx.fillRect(0, 0, width, height);
+
+    // Decorative sun shape
+    ctx.fillStyle = "#E9BFA8";
+    ctx.beginPath();
+    ctx.arc(930, 218, 96, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(29, 30, 26, 0.18)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(930, 218, 125, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Paper frame
+    ctx.strokeStyle = "rgba(29, 30, 26, 0.2)";
+    ctx.strokeRect(48.5, 48.5, width - 97, height - 97);
+
+    // Masthead
+    ctx.fillStyle = ink;
+    ctx.font = `600 20px ${serif}`;
+    ctx.textAlign = "left";
+    ctx.fillText("拾色手记", 84, 110);
+    ctx.fillStyle = muted;
+    ctx.font = `11px ${sans}`;
+    drawTracking(ctx, "HUE JOURNAL / COLOR NOTE", 84, 133, 2.1);
+    ctx.textAlign = "right";
+    ctx.fillText(
+      `${seasonLabel(now)} ${now.getFullYear()}`,
+      width - 84,
+      110
+    );
+    ctx.fillStyle = "rgba(117, 109, 97, .7)";
+    ctx.font = `10px ${mono}`;
+    ctx.fillText(dateStamp(now), width - 84, 132);
+
+    // Headline
+    ctx.textAlign = "left";
+    ctx.fillStyle = ink;
+    ctx.font = `600 88px ${serif}`;
+    ctx.fillText("我的配色笔记", 80, 264);
+    ctx.fillStyle = muted;
+    ctx.font = `17px ${sans}`;
+    ctx.fillText("五支颜色，一种只属于今天的画法。", 84, 307);
+
+    // Palette
+    const left = 80;
+    const top = 360;
+    const swatchHeight = 674;
+    const gap = 8;
+    const totalWidth = width - left * 2;
+    const swatchWidth = (totalWidth - gap * 4) / 5;
+
+    colors.forEach((color, index) => {
+      const x = left + index * (swatchWidth + gap);
+      const label = labelColor(color.hex);
+      ctx.fillStyle = color.hex;
+      ctx.fillRect(x, top, swatchWidth, swatchHeight);
+
+      ctx.fillStyle = label;
+      ctx.globalAlpha = 0.68;
+      ctx.font = `11px ${mono}`;
+      ctx.fillText(pad2(index + 1), x + 18, top + 35);
+      ctx.globalAlpha = 1;
+
+      ctx.strokeStyle = label;
+      ctx.globalAlpha = 0.35;
+      ctx.beginPath();
+      ctx.moveTo(x + 18, top + 52);
+      ctx.lineTo(x + 42, top + 52);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = label;
+      ctx.font = `600 27px ${serif}`;
+      const name = color.name.length > 6 ? `${color.name.slice(0, 6)}…` : color.name;
+      ctx.fillText(name, x + 18, top + swatchHeight - 61);
+      ctx.globalAlpha = 0.72;
+      ctx.font = `13px ${mono}`;
+      ctx.fillText(color.hex.toUpperCase(), x + 18, top + swatchHeight - 31);
+      ctx.globalAlpha = 1;
+    });
+
+    // Footnote
+    ctx.fillStyle = ink;
+    ctx.font = `500 19px ${sans}`;
+    ctx.fillText("先选颜色，再开始画。", 82, 1098);
+    ctx.fillStyle = muted;
+    ctx.font = `12px ${sans}`;
+    ctx.fillText("MIXED BY ME  /  ON HUE JOURNAL", 82, 1122);
+
+    ctx.textAlign = "right";
+    ctx.fillStyle = accentForPoster(colors[0]);
+    ctx.font = `600 17px ${serif}`;
+    ctx.fillText("自由搭配 · 拾色手记", width - 84, 1103);
+
+    // Footer
+    ctx.strokeStyle = "rgba(29, 30, 26, 0.24)";
+    ctx.beginPath();
+    ctx.moveTo(80, 1192);
+    ctx.lineTo(width - 80, 1192);
+    ctx.stroke();
+
+    // Brand flower
+    const stampX = 84;
+    const stampY = 1234;
+    const petalColors = ["#E9BFA8", "#D56748", "#E4D2A9", "#8A987C"];
+    petalColors.forEach((fill, index) => {
+      const px = stampX + (index % 2) * 15;
+      const py = stampY + Math.floor(index / 2) * 15;
+      ctx.fillStyle = fill;
+      ctx.beginPath();
+      ctx.arc(px + 7, py + 7, 7, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.textAlign = "left";
+    ctx.fillStyle = ink;
+    ctx.font = `600 16px ${serif}`;
+    ctx.fillText("拾色手记", 136, 1244);
+    ctx.fillStyle = muted;
+    ctx.font = `9px ${sans}`;
+    drawTracking(ctx, "COLLECT COLORS. MAKE THEM YOURS.", 136, 1263, 1.5);
+
+    ctx.textAlign = "right";
+    ctx.fillStyle = muted;
+    ctx.font = `10px ${mono}`;
+    ctx.fillText(`${dateStamp(now)}  /  NO. ${String(dayOfYear(now)).padStart(3, "0")}`, width - 84, 1244);
+    ctx.font = `10px ${sans}`;
+    ctx.fillText("为爱画画的人而做", width - 84, 1264);
+
+    // A light, deterministic paper grain
+    ctx.globalAlpha = 0.055;
+    ctx.fillStyle = "#584A3A";
+    let seed = 20261101;
+    for (let index = 0; index < 3600; index += 1) {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      const x = (seed % width) + 0.5;
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      const y = (seed % height) + 0.5;
+      ctx.fillRect(x, y, 1, 1);
+    }
+    ctx.globalAlpha = 1;
+
+    return canvas;
+  }
+
+  function drawTracking(ctx, text, x, y, tracking) {
+    let cursor = x;
+    for (const char of text) {
+      ctx.fillText(char, cursor, y);
+      cursor += ctx.measureText(char).width + tracking;
+    }
+  }
+
+  function accentForPoster(color) {
+    const luminance = relativeLuminance(color.hex);
+    return luminance > 0.6 ? "#B34D31" : "#D56748";
+  }
+
+  function canvasToBlob(canvas) {
+    return new Promise((resolve, reject) => {
+      if (typeof canvas.toBlob !== "function") {
+        reject(new Error("Canvas export is not supported"));
+        return;
+      }
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error("Could not create image"));
+      }, "image/png");
+    });
+  }
+
+  async function downloadPoster() {
+    if (dom.downloadBtn.disabled) return;
+    dom.downloadBtn.disabled = true;
+    dom.downloadBtn.setAttribute("aria-busy", "true");
+    try {
+      await loadImage();
+      const canvas = drawPoster();
+      const blob = await canvasToBlob(canvas);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `拾色手记-${dateStamp()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+      showToast("色卡正在下载，收好你的配色");
+    } catch (error) {
+      showToast("导出遇到一点问题，请稍后再试");
+    } finally {
+      dom.downloadBtn.disabled = false;
+      dom.downloadBtn.removeAttribute("aria-busy");
+    }
+  }
+
+  /* ---------- navigation & menu ---------- */
+
+  function closeMobileMenu() {
+    if (!dom.mobileMenu || !dom.menuToggle) return;
+    dom.mobileMenu.classList.remove("is-open");
+    dom.menuToggle.setAttribute("aria-expanded", "false");
+    dom.menuToggle.setAttribute("aria-label", "打开菜单");
+  }
+
+  function initNavigation() {
+    dom.menuToggle.addEventListener("click", () => {
+      const isOpen = dom.mobileMenu.classList.toggle("is-open");
+      dom.menuToggle.setAttribute("aria-expanded", String(isOpen));
+      dom.menuToggle.setAttribute("aria-label", isOpen ? "关闭菜单" : "打开菜单");
+    });
+
+    dom.mobileMenu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMobileMenu();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!dom.mobileMenu.classList.contains("is-open")) return;
+      if (!dom.siteHeader.contains(event.target)) closeMobileMenu();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMobileMenu();
+    });
+
+    const onScroll = () => {
+      dom.siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ---------- newsletter ---------- */
+
+  function initNewsletter() {
+    const form = dom.newsletterForm;
+    const input = dom.newsletterEmail;
+    const note = dom.newsletterNote;
+
+    input.addEventListener("input", () => {
+      input.removeAttribute("aria-invalid");
+      note.classList.remove("is-error", "is-success");
+      note.textContent = "演示表单：邮箱只保存在本机浏览器，不会发送邮件。";
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = input.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      if (!valid) {
+        input.setAttribute("aria-invalid", "true");
+        note.classList.remove("is-success");
+        note.classList.add("is-error");
+        note.textContent = "请输入一个有效的邮箱地址。";
+        input.focus();
+        return;
+      }
+      const alreadySubscribed = readStorage(STORAGE_KEYS.letter, null);
+      writeStorage(STORAGE_KEYS.letter, {
+        email,
+        subscribedAt: new Date().toISOString()
+      });
+      note.classList.remove("is-error");
+      note.classList.add("is-success");
+      note.textContent = alreadySubscribed
+        ? "这个邮箱已经保存在本地啦（演示表单，不会发送邮件）。"
+        : "演示完成：邮箱只保存在本地，不会真的发送邮件。";
+      input.value = "";
+      showToast("演示完成：邮箱只保存在本地");
+    });
+  }
+
+  /* ---------- reveal animations ---------- */
+
+  function initReveals() {
+    const elements = $$(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+  }
+
+  /* ---------- init ---------- */
+
+  function cacheDom() {
+    dom.paletteGrid = $("#paletteGrid");
+    dom.resultCount = $("#resultCount");
+    dom.emptyState = $("#emptyState");
+    dom.resetFilters = $("#resetFilters");
+    dom.favoritesFilter = $("#favoritesFilter");
+    dom.filterFavCount = $("#filterFavCount");
+    dom.headerFavorites = $("#headerFavorites");
+    dom.headerFavCount = $("#headerFavCount");
+    dom.mobileFavorites = $("#mobileFavorites");
+    dom.mobileFavCount = $("#mobileFavCount");
+    dom.paletteDialog = $("#paletteDialog");
+    dom.dialog = dom.paletteDialog;
+    dom.modalClose = $("#modalClose");
+    dom.modalKicker = $("#modalKicker");
+    dom.modalTitle = $("#modalTitle");
+    dom.modalEn = $("#modalEn");
+    dom.modalVisual = $("#modalVisual");
+    dom.modalDesc = $("#modalDesc");
+    dom.modalQuote = $("#modalQuote");
+    dom.modalProportion = $("#modalProportion");
+    dom.modalProportionLabels = $("#modalProportionLabels");
+    dom.modalTags = $("#modalTags");
+    dom.modalFav = $("#modalFav");
+    dom.usePaletteBtn = $("#usePaletteBtn");
+    dom.paletteBoard = $("#paletteBoard");
+    dom.colorPicker = $("#colorPicker");
+    dom.wellFill = $("#wellFill");
+    dom.activeName = $("#activeName");
+    dom.activeHex = $("#activeHex");
+    dom.activeIndexLabel = $("#activeIndexLabel");
+    dom.hexForm = $("#hexForm");
+    dom.hexInput = $("#hexInput");
+    dom.hexHint = $("#hexHint");
+    dom.inspirationDots = $("#inspirationDots");
+    dom.mixA = $("#mixA");
+    dom.mixB = $("#mixB");
+    dom.mixAFill = $("#mixAFill");
+    dom.mixBFill = $("#mixBFill");
+    dom.mixAHex = $("#mixAHex");
+    dom.mixBHex = $("#mixBHex");
+    dom.mixRatio = $("#mixRatio");
+    dom.ratioA = $("#ratioA");
+    dom.ratioB = $("#ratioB");
+    dom.ratioRow = $(".ratio-row");
+    dom.mixResult = $(".mix-result");
+    dom.mixResultColor = $("#mixResultColor");
+    dom.mixResultHex = $("#mixResultHex");
+    dom.addMixBtn = $("#addMixBtn");
+    dom.randomBtn = $("#randomBtn");
+    dom.copyBtn = $("#copyBtn");
+    dom.downloadBtn = $("#downloadBtn");
+    dom.saveState = $("#saveState");
+    dom.boardDate = $("#boardDate");
+    dom.siteHeader = $(".site-header");
+    dom.menuToggle = $("#menuToggle");
+    dom.mobileMenu = $("#mobileMenu");
+    dom.newsletterForm = $("#newsletterForm");
+    dom.newsletterEmail = $("#newsletterEmail");
+    dom.newsletterNote = $("#newsletterNote");
+    dom.palettesSection = $("#palettes");
+    dom.studioSection = $("#studio");
+    dom.toast = $("#toast");
+    dom.toastMessage = $("#toastMessage");
+  }
+
+  function init() {
+    cacheDom();
+    state.favorites = loadFavorites();
+    loadSavedPalette();
+    initGallery();
+    initDialog();
+    initBoard();
+    initMixer();
+    initNavigation();
+    initNewsletter();
+    initReveals();
+    updateFavoriteCounts();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
